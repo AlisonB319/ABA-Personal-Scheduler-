@@ -43,6 +43,17 @@ namespace ProjectPlanner.Classes
             return projects;
         }
 
+        private void addProject(Project project)
+        {
+            this.projects.Add(project);
+        }
+
+        private void removeProject(string name)
+        {
+            Project toRemove = this.projects.Find(x => x.Getname().Contains(name));
+            this.projects.Remove(toRemove);
+        }
+
         private void Setprojects(List<Project> value)
         {
             projects = value;
