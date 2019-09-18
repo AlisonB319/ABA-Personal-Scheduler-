@@ -11,11 +11,6 @@ namespace ProjectPlanner.Classes
         private string firstName, lastName, email, password;
 
 
-
-
-
-
-
         private List<Project> projects;
 
         private string Getemail()
@@ -50,8 +45,8 @@ namespace ProjectPlanner.Classes
 
         private void removeProject(string name)
         {
-            Project toRemove = this.projects.Find(x => x.Getname().Contains(name));
-            this.projects.Remove(toRemove);
+            //Project toRemove = this.projects.Find(x => x.Getname().Contains(name));
+            //this.projects.Remove(toRemove);
         }
 
         private void Setprojects(List<Project> value)

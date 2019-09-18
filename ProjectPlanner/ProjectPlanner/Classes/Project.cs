@@ -14,19 +14,6 @@ namespace ProjectPlanner.Classes
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
         private List<Schedule> Getschedules()
         {
             return schedules;

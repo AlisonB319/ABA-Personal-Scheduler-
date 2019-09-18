@@ -15,13 +15,6 @@ namespace ProjectPlanner.Classes
         {
             SetDataBase(new Hashtable());
         }
-
-
-
-
-
-
-
         public Hashtable GetDataBase()
         {
             return dataBase;

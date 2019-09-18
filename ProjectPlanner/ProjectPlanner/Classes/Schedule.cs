@@ -13,16 +13,6 @@ namespace ProjectPlanner.Classes
         private float hoursNeeded, hoursWorked, percentComplete;
 
 
-
-
-
-
-
-
-
-
-
-
         private string GetName()
         {
             return name;
