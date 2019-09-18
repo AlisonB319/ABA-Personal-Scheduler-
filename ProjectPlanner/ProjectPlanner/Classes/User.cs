@@ -6,78 +6,75 @@
     using System.Text;
     using System.Threading.Tasks;
 
-
-    class User
+    public class User
     {
-        private string _firstName, _lastName, _email, _password;
-
-
-        private List<Project> _projects;
+        private string firstName, lastName, email, password;
+        private List<Project> projects;
 
         private string Getemail()
         {
-            return this._email;
+            return this.email;
         }
 
         private void SetEmail(string value)
         {
-            this._email = value;
+            this.email = value;
         }
 
         private string GetPassword()
         {
-            return this._password;
+            return this.password;
         }
 
         private void SetPassword(string value)
         {
-            this._password = value;
+            this.password = value;
         }
 
         private List<Project> GetProjects()
         {
-            return this._projects;
+            return this.projects;
         }
 
         private void AddProject(Project project)
         {
-            this._projects.Add(project);
+            this.projects.Add(project);
         }
 
         private bool RemoveProject(string name)
         {
-            Project toRemove = this._projects.Find(x => x.GetName().Contains(name));
-            return this._projects.Remove(toRemove);
+            Project toRemove = this.projects.Find(x => x.GetName().Contains(name));
+            return this.projects.Remove(toRemove);
         }
 
         private bool RemoveProject(Project val)
         {
-            return this._projects.Remove(val);
+            return this.projects.Remove(val);
         }
 
         private void SetProjects(List<Project> value)
         {
-            this._projects = value;
+            this.projects = value;
         }
 
         private string GetLastName()
         {
-            return this._lastName;
+            return this.lastName;
         }
 
         private void SetLastName(string value)
         {
-            this._lastName = value;
+            this.lastName = value;
         }
 
         private string GetFirstName()
         {
-            return this._firstName;
+            return this.firstName;
         }
 
         private void SetFirstName(string value)
         {
-            this._firstName = value;
+            this.firstName = value;
         }
     }
 }

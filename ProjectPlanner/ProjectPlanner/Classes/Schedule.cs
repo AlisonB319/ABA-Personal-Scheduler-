@@ -6,91 +6,90 @@
     using System.Text;
     using System.Threading.Tasks;
 
-    class Schedule
+    public class Schedule
     {
-        private string _name, _client, _description;
-        private DateTime _startDate, _endDate;
-        private float _hoursNeeded, _hoursWorked, _percentComplete;
-
+        private string name, client, description;
+        private DateTime startDate, endDate;
+        private float hoursNeeded, hoursWorked, percentComplete;
 
         public string GetName()
         {
-            return this._name;
+            return this.name;
         }
 
-        private void SetName(string value)
+        public void SetName(string value)
         {
-            this._name = value;
+            this.name = value;
         }
 
         public string GetClient()
         {
-            return this._client;
+            return this.client;
         }
 
-        private void SetClient(string value)
+        public void SetClient(string value)
         {
-            this._client = value;
+            this.client = value;
         }
 
         public string GetDescription()
         {
-            return this._description;
+            return this.description;
         }
 
-        private void SetDescription(string value)
+        public void SetDescription(string value)
         {
-            this._description = value;
+            this.description = value;
         }
         
         public DateTime GetStartDate()
         {
-            return this._startDate;
+            return this.startDate;
         }
 
-        private void SetStartDate(DateTime value)
+        public void SetStartDate(DateTime value)
         {
-            this._startDate = value;
+            this.startDate = value;
         }
         
         public DateTime GetEndDate()
         {
-            return this._endDate;
+            return this.endDate;
         }
 
-        private void SetEndDate(DateTime value)
+        public void SetEndDate(DateTime value)
         {
-            this._endDate = value;
+            this.endDate = value;
         }
         
         public float GetHoursNeeded()
         {
-            return this._hoursNeeded;
+            return this.hoursNeeded;
         }
 
-        private void SetHoursNeeded(float value)
+        public void SetHoursNeeded(float value)
         {
-            this._hoursNeeded = value;
+            this.hoursNeeded = value;
         }
         
         public float GetHoursWorked()
         {
-            return this._hoursWorked;
+            return this.hoursWorked;
         }
 
-        private void SetHoursWorked(float value)
+        public void SetHoursWorked(float value)
         {
-            this._hoursWorked = value;
+            this.hoursWorked = value;
         }
         
         public float GetPercentComplete()
         {
-            return this._percentComplete;
+            return this.percentComplete;
         }
 
-        private void SetPercentComplete(float value)
+        public void SetPercentComplete(float value)
         {
-            this._percentComplete = value;
+            this.percentComplete = value;
         }
     }
 }

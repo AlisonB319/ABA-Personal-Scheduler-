@@ -6,82 +6,81 @@
     using System.Text;
     using System.Threading.Tasks;
 
-    class Project
+    public class Project
     {
-        private string _name, _description;
-        private DateTime _startDate, _endDate;
-        private List<Schedule> _schedules;
-
-
+        private string name, description;
+        private DateTime startDate, endDate;
+        private List<Schedule> schedules;
 
         public List<Schedule> GetSchedules()
         {
-            return this._schedules;
+            return this.schedules;
         }
 
-        private void SetSchedules(List<Schedule> value)
+        public void SetSchedules(List<Schedule> value)
         {
-            this._schedules = value;
+            this.schedules = value;
         }
 
-        private void AddSchedule(Schedule val)
+        public void AddSchedule(Schedule val)
         {
-            this._schedules.Add(val);
+            this.schedules.Add(val);
         }
 
         // this method accepts a string which is the name of a schedule,
         // searches through the list of schedules, and removes the first schedule it finds with that
         // name and removes it
-        private bool RemoveSchedule(String val)
+        public bool RemoveSchedule(String val)
         {
-            Schedule toRemove = this._schedules.Find(x => x.GetName().Contains(this._name));
-            return this._schedules.Remove(toRemove);
+            Schedule toRemove = this.schedules.Find(x => x.GetName().Contains(this.name));
+            return this.schedules.Remove(toRemove);
         }
+
         // this method accepts a schedule as parameter and removes that schedule from the list
         // returns true if successful and false if not.
-        private bool RemoveSchedule(Schedule val)
+        public bool RemoveSchedule(Schedule val)
         {
-            return this._schedules.Remove(val);
+            return this.schedules.Remove(val);
         }
 
         public DateTime GetEndDate()
         {
-            return this._endDate;
+            return this.endDate;
         }
 
-        private void SetEndDate(DateTime value)
+        public void SetEndDate(DateTime value)
         {
-            this._endDate = value;
+            this.endDate = value;
         }
 
         public DateTime GetStartDate()
         {
-            return this._startDate;
+            return this.startDate;
         }
 
-        private void SetStartDate(DateTime value)
+        public void SetStartDate(DateTime value)
         {
-            this._startDate = value;
+            this.startDate = value;
         }
 
         public string GetDescription()
         {
-            return this._description;
+            return this.description;
         }
 
-        private void SetDescription(string value)
+        public void SetDescription(string value)
         {
-            this._description = value;
+            this.description = value;
         }
 
         public string GetName()
         {
-            return this._name;
+            return this.name;
         }
 
-        private void SetName(string value)
+        public void SetName(string value)
         {
-            this._name = value;
+            this.name = value;
         }
     }
 }
