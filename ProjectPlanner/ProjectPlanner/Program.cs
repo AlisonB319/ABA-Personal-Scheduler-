@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjectPlanner.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,8 @@ namespace ProjectPlanner
     {
         static void Main(string[] args)
         {
+            UI newUI = new UI();
+            newUI.LogIn();
         }
     }
 }
