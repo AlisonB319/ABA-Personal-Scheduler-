@@ -19,19 +19,58 @@
             }
         }
 
+        public void myLogIn()
+        {
+            Console.Clear();
+            DataStore userDatabase = new DataStore();
+            bool loginComplete = false;
+
+            do
+            {
+                Console.WriteLine("Please enter your username, or press 1 to create an account");
+                string username = Console.ReadLine();
+                if (username == "1")
+                {
+                    // Creating the User account
+                    // Assuming that email is the username
+                    User newUser = new User();
+
+                    string fName, lName, email, password;
+                    Console.WriteLine("Please enter your first name");
+                    fName = Console.ReadLine();
+                    Console.WriteLine("Please enter your last name");
+                    lName = Console.ReadLine();
+                    Console.WriteLine("Please enter your email, this is also your username");
+                    email = Console.ReadLine();
+                    Console.WriteLine("Please enter your password");
+                    password = Console.ReadLine();
+
+                    newUser.CreateUser(fName, lName, email, password); // create the user
+                    userDatabase.AddData(email, password); // add data to DataStore
+
+
+                }
+                else if (userDatabase.AuthenticateUser(username))
+                {
+                    Console.WriteLine("Please enter your password");
+                    string password = Console.ReadLine();
+                }
+            } while (!loginComplete);
+        }
+
         // Logs a user in to the system
         public void LogIn()
         {
             Console.Clear();
             bool loginComplete = false;
-            
+            DataStore userAuthentication = new DataStore();
+
             // loops while user attempts to login
             do 
             {
-                
                 Console.WriteLine("Enter your login username");
                 string user = Console.ReadLine();
-                if (this._dataStore.GetDataBase().ContainsKey(user))
+                if (userAuthentication.AuthenticateUser(user))
                 {
                     Console.WriteLine("Enter your login password");
                     string pass = Console.ReadLine();
@@ -54,7 +93,6 @@
                         Console.WriteLine("Error getting user class from database, {}", e);
                         break;
                     }
-                    
                 }
                 else
                 {

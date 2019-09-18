@@ -28,5 +28,13 @@ namespace ProjectPlanner.Classes
         {
             this._dataBase.Add(username, password);
         }
+        public bool AuthenticateUser(string username)
+        {
+            if (this._dataBase.ContainsKey(username))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }
