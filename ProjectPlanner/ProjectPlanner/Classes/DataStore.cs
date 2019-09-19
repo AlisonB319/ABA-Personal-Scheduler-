@@ -1,28 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Collections;
-
-namespace ProjectPlanner.Classes
+﻿namespace ProjectPlanner.Classes
 {
-    class DataStore
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+
+    public class DataStore
     {
         private Hashtable dataBase;
 
         public DataStore()
         {
-            SetDataBase(new Hashtable());
+            this.SetDataBase(new Hashtable());
         }
+
         public Hashtable GetDataBase()
         {
-            return dataBase;
+            return this.dataBase;
         }
 
         public void SetDataBase(Hashtable value)
         {
-            dataBase = value;
+            this.dataBase = value;
         }
     }
 }

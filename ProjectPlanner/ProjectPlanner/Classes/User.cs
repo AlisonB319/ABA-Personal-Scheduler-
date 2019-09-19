@@ -1,77 +1,80 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ProjectPlanner.Classes
+﻿namespace ProjectPlanner.Classes
 {
-    class User
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+
+    public class User
     {
         private string firstName, lastName, email, password;
-
-
         private List<Project> projects;
 
         private string Getemail()
         {
-            return email;
+            return this.email;
         }
 
-        private void Setemail(string value)
+        private void SetEmail(string value)
         {
-            email = value;
+            this.email = value;
         }
 
-        private string Getpassword()
+        private string GetPassword()
         {
-            return password;
+            return this.password;
         }
 
-        private void Setpassword(string value)
+        private void SetPassword(string value)
         {
-            password = value;
+            this.password = value;
         }
 
-        private List<Project> Getprojects()
+        private List<Project> GetProjects()
         {
-            return projects;
+            return this.projects;
         }
 
-        private void addProject(Project project)
+        private void AddProject(Project project)
         {
             this.projects.Add(project);
         }
 
-        private void removeProject(string name)
+        private bool RemoveProject(string name)
         {
-            //Project toRemove = this.projects.Find(x => x.Getname().Contains(name));
-            //this.projects.Remove(toRemove);
+            Project toRemove = this.projects.Find(x => x.GetName().Contains(name));
+            return this.projects.Remove(toRemove);
         }
 
-        private void Setprojects(List<Project> value)
+        private bool RemoveProject(Project val)
         {
-            projects = value;
+            return this.projects.Remove(val);
+        }
+
+        private void SetProjects(List<Project> value)
+        {
+            this.projects = value;
         }
 
         private string GetLastName()
         {
-            return lastName;
+            return this.lastName;
         }
 
         private void SetLastName(string value)
         {
-            lastName = value;
+            this.lastName = value;
         }
 
         private string GetFirstName()
         {
-            return firstName;
+            return this.firstName;
         }
 
         private void SetFirstName(string value)
         {
-            firstName = value;
+            this.firstName = value;
         }
     }
 }

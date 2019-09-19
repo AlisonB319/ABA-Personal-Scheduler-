@@ -1,41 +1,43 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ProjectPlanner.Classes
+﻿namespace ProjectPlanner.Classes
 {
-    class UI
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+
+    public class UI
     {
         private DataStore dataStore;
 
-
         public void ListUsers()
         {
-            foreach(object k in dataStore.GetDataBase().Values)
+            foreach (object k in this.dataStore.GetDataBase().Values)
             {
                 Console.WriteLine(k.ToString());
             }
         }
 
-        //Logs a user in to the system
+        // Logs a user in to the system
         public void LogIn()
         {
             Console.Clear();
             bool loginComplete = false;
-            do //loops while user attempts to login
+            
+            // loops while user attempts to login
+            do 
             {
-                
                 Console.WriteLine("Enter your login username");
                 string user = Console.ReadLine();
-                if (dataStore.GetDataBase().ContainsKey(user))
+                if (this.dataStore.GetDataBase().ContainsKey(user))
                 {
                     Console.WriteLine("Enter your login password");
                     string pass = Console.ReadLine();
-                    try //make sure our cast works, the value of the hashed username may not be a User class
+                    
+                    // make sure our cast works, the value of the hashed username may not be a User class
+                    try
                     {
-                        User userClass = (User)dataStore.GetDataBase()[user];
+                        User userClass = (User)this.dataStore.GetDataBase()[user];
                         if (pass.Equals(userClass))
                         {
                             loginComplete = true;
@@ -45,25 +47,28 @@ namespace ProjectPlanner.Classes
                             Console.WriteLine("Password entered incorrectly");
                         }
                     }
-                    catch(Exception e)
+                    catch (Exception e)
                     {
-                        Console.WriteLine("Error getting user class from database");
+                        Console.WriteLine("Error getting user class from database, {}", e);
                         break;
-                    }
-                    
+                    }   
                 }
                 else
                 {
                     Console.WriteLine("Username entered incorrectly/username does not exist");
                 }
+
                 Console.WriteLine("Press 'q' to quit login or any other key to try again");
                 ConsoleKeyInfo key = Console.ReadKey();
+
                 if (key.KeyChar.Equals('q'))
                 {
                     return;
                 }
+
                 Console.Write("\n\n");
-            } while (!loginComplete);
+            }
+            while (!loginComplete);
         }
     }
 }

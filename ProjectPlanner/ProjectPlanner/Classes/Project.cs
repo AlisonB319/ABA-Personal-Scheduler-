@@ -1,67 +1,86 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ProjectPlanner.Classes
+﻿namespace ProjectPlanner.Classes
 {
-    class Project
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+
+    public class Project
     {
         private string name, description;
         private DateTime startDate, endDate;
         private List<Schedule> schedules;
 
-
-
-        private List<Schedule> Getschedules()
+        public List<Schedule> GetSchedules()
         {
-            return schedules;
+            return this.schedules;
         }
 
-        private void Setschedules(List<Schedule> value)
+        public void SetSchedules(List<Schedule> value)
         {
-            schedules = value;
+            this.schedules = value;
         }
 
-        private DateTime GetendDate()
+        public void AddSchedule(Schedule val)
         {
-            return endDate;
+            this.schedules.Add(val);
         }
 
-        private void SetendDate(DateTime value)
+        // this method accepts a string which is the name of a schedule,
+        // searches through the list of schedules, and removes the first schedule it finds with that
+        // name and removes it
+        public bool RemoveSchedule(String val)
         {
-            endDate = value;
+            Schedule toRemove = this.schedules.Find(x => x.GetName().Contains(this.name));
+            return this.schedules.Remove(toRemove);
         }
 
-        private DateTime GetstartDate()
+        // this method accepts a schedule as parameter and removes that schedule from the list
+        // returns true if successful and false if not.
+        public bool RemoveSchedule(Schedule val)
         {
-            return startDate;
+            return this.schedules.Remove(val);
         }
 
-        private void SetstartDate(DateTime value)
+        public DateTime GetEndDate()
         {
-            startDate = value;
+            return this.endDate;
         }
 
-        private string Getdescription()
+        public void SetEndDate(DateTime value)
         {
-            return description;
+            this.endDate = value;
         }
 
-        private void Setdescription(string value)
+        public DateTime GetStartDate()
         {
-            description = value;
+            return this.startDate;
         }
 
-        private string Getname()
+        public void SetStartDate(DateTime value)
         {
-            return name;
+            this.startDate = value;
         }
 
-        private void Setname(string value)
+        public string GetDescription()
         {
-            name = value;
+            return this.description;
+        }
+
+        public void SetDescription(string value)
+        {
+            this.description = value;
+        }
+
+        public string GetName()
+        {
+            return this.name;
+        }
+
+        public void SetName(string value)
+        {
+            this.name = value;
         }
     }
 }
