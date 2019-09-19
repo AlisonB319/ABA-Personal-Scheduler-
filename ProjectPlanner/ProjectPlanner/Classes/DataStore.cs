@@ -41,5 +41,9 @@ namespace ProjectPlanner.Classes
             User userClass = (User)this._dataBase[username];
             return userClass.authenticatePassword(password);
         }
+        public User getAuthenticatedUser(string username, string password)
+        {
+            return (User)this._dataBase[username];
+        }
     }
 }

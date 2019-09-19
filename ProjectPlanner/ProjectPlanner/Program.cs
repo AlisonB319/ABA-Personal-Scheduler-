@@ -13,7 +13,14 @@ namespace ProjectPlanner
         static void Main(string[] args)
         {
             UI newUI = new UI();
-            newUI.LogIn();
+            bool loggedIn;
+            loggedIn = newUI.LogIn();
+
+            if (loggedIn) // the user has logged in successfully 
+            {
+                newUI.ScheduleOptions();
+            }
+            
         }
     }
 }

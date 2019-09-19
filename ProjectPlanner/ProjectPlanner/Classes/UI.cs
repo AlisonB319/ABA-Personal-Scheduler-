@@ -9,6 +9,7 @@ namespace ProjectPlanner.Classes
     class UI
     {
         private DataStore _dataStore;
+        private User _authenticatedUser;
 
         public void ListUsers()
         {
@@ -18,12 +19,11 @@ namespace ProjectPlanner.Classes
             }
         }
 
-        public void LogIn()
+        public bool LogIn()
         {
             Console.Clear();
-            DataStore userDatabase = new DataStore();
             bool loginComplete = false;
-
+            this._dataStore = new DataStore();
             do
             {
                 Console.WriteLine("Please enter your username, or press 1 to create an account");
@@ -47,26 +47,47 @@ namespace ProjectPlanner.Classes
                     create_password = Console.ReadLine();
 
                     newUser.CreateUser(fName, lName, email, create_password); // create the user
-                    userDatabase.AddData(email, newUser); // add user data to DataStore
+                    this._dataStore.AddData(email, newUser); // add user data to DataStore
                 }
-                else if (userDatabase.AuthenticateUsername(username))
+                else if (_dataStore.AuthenticateUsername(username))
                 {
                     Console.WriteLine("Please enter your password");
                     string password = Console.ReadLine();
-                    if (userDatabase.AuthenticatePassword(username, password))
+                    if (this._dataStore.AuthenticatePassword(username, password))
                     {
                         Console.WriteLine("User is authenticated");
+                        this._authenticatedUser = this._dataStore.getAuthenticatedUser(username, password);
+                        loginComplete = true;
                     }
                     else
                     {
                         Console.WriteLine("Authentication failed please try again");
+                        continue;
                     }
                 }
                 else
                 {
                     Console.WriteLine("Authentication failed please try again");
+                    continue;
                 }
             } while (!loginComplete);
+            return true;
+        }
+
+        public void ScheduleOptions()
+        {
+            bool makingSchedules = false;
+            do
+            {
+                string option;
+                Console.WriteLine("Press 1 to create a schedule");
+                option = Console.ReadLine();
+                if (option == "1")
+                {
+                    Schedule newSchedule = new Schedule();
+                    newSchedule.CreateSchedule();
+                }
+            } while (!makingSchedules);
         }
     }
 }

@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
@@ -90,6 +91,43 @@
         public void SetPercentComplete(float value)
         {
             this.percentComplete = value;
+        }
+
+        public void CreateSchedule()
+        {
+            string name, client, start, end, hoursNeeded, hoursWorked, description;
+
+            Console.WriteLine("Please enter the name of the schedule");
+            name = Console.ReadLine();
+            this.SetName(name);
+
+            Console.WriteLine("Please enter the client of the schedule");
+            client = Console.ReadLine();
+            this.SetClient(client);
+
+            Console.WriteLine("Please enter the start date of the schedule MM-DD-YYYY");
+            start = Console.ReadLine();
+            DateTime startDate = Convert.ToDateTime(start);
+            this.SetStartDate(startDate);
+
+            Console.WriteLine("Please enter the end date of the schedule MM-DD-YYYY");
+            end = Console.ReadLine();
+            DateTime endDate = Convert.ToDateTime(end);
+            this.SetStartDate(endDate);
+
+            Console.WriteLine("Please enter hours needed, partial hours are excepted ex: 4.3");
+            hoursNeeded = Console.ReadLine();
+            float fHoursNeeded = float.Parse(hoursNeeded, CultureInfo.InvariantCulture.NumberFormat);
+            this.SetHoursNeeded(fHoursNeeded);
+
+            Console.WriteLine("Please enter hours worked, partial hours are excepted ex: 4.3");
+            hoursWorked = Console.ReadLine();
+            float fHoursWorked = float.Parse(hoursWorked, CultureInfo.InvariantCulture.NumberFormat);
+            this.SetHoursWorked(fHoursWorked);
+
+            Console.WriteLine("Please enter the description of the schedule");
+            description = Console.ReadLine();
+            this.SetDescription(description);
         }
     }
 }
