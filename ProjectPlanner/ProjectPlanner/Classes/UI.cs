@@ -1,4 +1,4 @@
-﻿namespace ProjectPlanner.Classes
+namespace ProjectPlanner.Classes
 {
     using System;
     using System.Collections.Generic;

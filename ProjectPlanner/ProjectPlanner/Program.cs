@@ -1,4 +1,4 @@
-﻿using ProjectPlanner.Classes;
+using ProjectPlanner.Classes;
 using System;
 using System.Collections;
 using System.Collections.Generic;
