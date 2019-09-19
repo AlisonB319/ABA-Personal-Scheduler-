@@ -20,10 +20,26 @@
         {
             return this.dataBase;
         }
-
         public void SetDataBase(Hashtable value)
         {
             this.dataBase = value;
+        }
+        public void AddData(string username, User account)
+        {
+            this._dataBase.Add(username, account);
+        }
+        public bool AuthenticateUsername(string username)
+        {
+            if (this._dataBase.ContainsKey(username))
+            {
+                return true;
+            }
+            return false;
+        }
+        public bool AuthenticatePassword(string username, string password)
+        {
+            User userClass = (User)this._dataBase[username];
+            return userClass.authenticatePassword(password);
         }
     }
 }
