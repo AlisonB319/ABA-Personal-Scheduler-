@@ -46,14 +46,16 @@
                     password = Console.ReadLine();
 
                     newUser.CreateUser(fName, lName, email, password); // create the user
-                    userDatabase.AddData(email, password); // add data to DataStore
-
-
+                    userDatabase.AddData(email, newUser); // add user data to DataStore
                 }
-                else if (userDatabase.AuthenticateUser(username))
+                else if (userDatabase.AuthenticateUsername(username))
                 {
                     Console.WriteLine("Please enter your password");
                     string password = Console.ReadLine();
+                    if (userDatabase.AuthenticatePassword(username, password))
+                    {
+                        Console.WriteLine("User is authenticated");
+                    }
                 }
             } while (!loginComplete);
         }
@@ -70,7 +72,7 @@
             {
                 Console.WriteLine("Enter your login username");
                 string user = Console.ReadLine();
-                if (userAuthentication.AuthenticateUser(user))
+                if (userAuthentication.AuthenticateUsername(user))
                 {
                     Console.WriteLine("Enter your login password");
                     string pass = Console.ReadLine();

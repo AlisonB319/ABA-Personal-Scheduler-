@@ -60,7 +60,15 @@
             this._lastName = lname;
             this._email = email;
             this._password = password;
-
+        }
+        
+        public bool authenticatePassword(string password)
+        {
+            if (this._password == password)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }
