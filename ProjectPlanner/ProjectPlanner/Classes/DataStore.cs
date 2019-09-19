@@ -39,7 +39,11 @@ namespace ProjectPlanner.Classes
         public bool AuthenticatePassword(string username, string password)
         {
             User userClass = (User)this._dataBase[username];
-            return userClass.authenticatePassword(password);
+            return userClass.AuthenticatePassword(password);
+        }
+        public User getAuthenticatedUser(string username, string password)
+        {
+            return (User)this._dataBase[username];
         }
     }
 }

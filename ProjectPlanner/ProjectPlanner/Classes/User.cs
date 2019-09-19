@@ -13,6 +13,12 @@ namespace ProjectPlanner.Classes
 
         private List<Project> _projects;
 
+        public User()
+        {
+            _projects = new List<Project>();
+        }
+
+
         private string Getemail()
         {
             return this._email;
@@ -23,12 +29,29 @@ namespace ProjectPlanner.Classes
             return this._password;
         }
 
-        private List<Project> GetProjects()
+        private List<Project> GetListProjects()
         {
             return this._projects;
         }
 
-        private void AddProject(Project project)
+        public Project GetProject(string projectName)
+        /*
+         * This is to get a single project from the user so that a schedule can be added
+         */
+        {
+            foreach (Project proj in this._projects)
+            {
+                string projName;
+                projName = proj.GetName();
+                if (projName == projectName)
+                {
+                    return proj;
+                }
+            }
+            return null;
+        }
+
+        public void AddProject(Project project)
         {
             this._projects.Add(project);
         }
@@ -62,7 +85,7 @@ namespace ProjectPlanner.Classes
             this._password = password;
         }
         
-        public bool authenticatePassword(string password)
+        public bool AuthenticatePassword(string password)
         {
             if (this._password == password)
             {
