@@ -10,7 +10,6 @@
     {
         private DataStore _dataStore;
 
-
         public void ListUsers()
         {
             foreach (object k in this._dataStore.GetDataBase().Values)
@@ -19,7 +18,7 @@
             }
         }
 
-        public void myLogIn()
+        public void LogIn()
         {
             Console.Clear();
             DataStore userDatabase = new DataStore();
@@ -29,23 +28,25 @@
             {
                 Console.WriteLine("Please enter your username, or press 1 to create an account");
                 string username = Console.ReadLine();
+
+
                 if (username == "1")
                 {
                     // Creating the User account
                     // Assuming that email is the username
                     User newUser = new User();
 
-                    string fName, lName, email, password;
+                    string fName, lName, email, create_password;
                     Console.WriteLine("Please enter your first name");
                     fName = Console.ReadLine();
                     Console.WriteLine("Please enter your last name");
                     lName = Console.ReadLine();
-                    Console.WriteLine("Please enter your email, this is also your username");
+                    Console.WriteLine("Please enter your email,k this is also your username");
                     email = Console.ReadLine();
                     Console.WriteLine("Please enter your password");
-                    password = Console.ReadLine();
+                    create_password = Console.ReadLine();
 
-                    newUser.CreateUser(fName, lName, email, password); // create the user
+                    newUser.CreateUser(fName, lName, email, create_password); // create the user
                     userDatabase.AddData(email, newUser); // add user data to DataStore
                 }
                 else if (userDatabase.AuthenticateUsername(username))
@@ -56,57 +57,15 @@
                     {
                         Console.WriteLine("User is authenticated");
                     }
-                }
-            } while (!loginComplete);
-        }
-
-        // Logs a user in to the system
-        public void LogIn()
-        {
-            Console.Clear();
-            bool loginComplete = false;
-            DataStore userAuthentication = new DataStore();
-
-            // loops while user attempts to login
-            do 
-            {
-                Console.WriteLine("Enter your login username");
-                string user = Console.ReadLine();
-                if (userAuthentication.AuthenticateUsername(user))
-                {
-                    Console.WriteLine("Enter your login password");
-                    string pass = Console.ReadLine();
-                    
-                    // make sure our cast works, the value of the hashed username may not be a User class
-                    try
+                    else
                     {
-                        User userClass = (User)this._dataStore.GetDataBase()[user];
-                        if (pass.Equals(userClass))
-                        {
-                            loginComplete = true;
-                        }
-                        else
-                        {
-                            Console.WriteLine("Password entered incorrectly");
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine("Error getting user class from database, {}", e);
-                        break;
+                        Console.WriteLine("Authentication failed please try again");
                     }
                 }
                 else
                 {
-                    Console.WriteLine("Username entered incorrectly/username does not exist");
+                    Console.WriteLine("Authentication failed please try again");
                 }
-                Console.WriteLine("Press 'q' to quit login or any other key to try again");
-                ConsoleKeyInfo key = Console.ReadKey();
-                if (key.KeyChar.Equals('q'))
-                {
-                    return;
-                }
-                Console.Write("\n\n");
             } while (!loginComplete);
         }
     }

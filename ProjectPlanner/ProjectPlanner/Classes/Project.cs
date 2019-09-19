@@ -12,8 +12,6 @@
         private DateTime _startDate, _endDate;
         private List<Schedule> _schedules;
 
-
-
         public List<Schedule> GetSchedules()
         {
             return this._schedules;
