@@ -1,96 +1,96 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ProjectPlanner.Classes
+﻿namespace ProjectPlanner.Classes
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+
     class Schedule
     {
-        private string name, client, description;
-        private DateTime startDate, endDate;
-        private float hoursNeeded, hoursWorked, percentComplete;
+        private string _name, _client, _description;
+        private DateTime _startDate, _endDate;
+        private float _hoursNeeded, _hoursWorked, _percentComplete;
 
 
-        private string GetName()
+        public string GetName()
         {
-            return name;
+            return this._name;
         }
 
         private void SetName(string value)
         {
-            name = value;
+            this._name = value;
         }
 
-        private string GetClient()
+        public string GetClient()
         {
-            return client;
+            return this._client;
         }
 
         private void SetClient(string value)
         {
-            client = value;
+            this._client = value;
         }
 
-        private string GetDescription()
+        public string GetDescription()
         {
-            return description;
+            return this._description;
         }
 
         private void SetDescription(string value)
         {
-            description = value;
+            this._description = value;
         }
         
-        private DateTime GetStartDate()
+        public DateTime GetStartDate()
         {
-            return startDate;
+            return this._startDate;
         }
 
         private void SetStartDate(DateTime value)
         {
-            startDate = value;
+            this._startDate = value;
         }
         
-        private DateTime GetEndDate()
+        public DateTime GetEndDate()
         {
-            return endDate;
+            return this._endDate;
         }
 
         private void SetEndDate(DateTime value)
         {
-            endDate = value;
+            this._endDate = value;
         }
         
-        private float GetHoursNeeded()
+        public float GetHoursNeeded()
         {
-            return hoursNeeded;
+            return this._hoursNeeded;
         }
 
         private void SetHoursNeeded(float value)
         {
-            hoursNeeded = value;
+            this._hoursNeeded = value;
         }
         
-        private float GetHoursWorked()
+        public float GetHoursWorked()
         {
-            return hoursWorked;
+            return this._hoursWorked;
         }
 
         private void SetHoursWorked(float value)
         {
-            hoursWorked = value;
+            this._hoursWorked = value;
         }
         
-        private float GetPercentComplete()
+        public float GetPercentComplete()
         {
-            return percentComplete;
+            return this._percentComplete;
         }
 
         private void SetPercentComplete(float value)
         {
-            percentComplete = value;
+            this._percentComplete = value;
         }
     }
 }
