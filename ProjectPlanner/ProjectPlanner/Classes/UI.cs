@@ -41,7 +41,7 @@ namespace ProjectPlanner.Classes
                     fName = Console.ReadLine();
                     Console.WriteLine("Please enter your last name");
                     lName = Console.ReadLine();
-                    Console.WriteLine("Please enter your email,k this is also your username");
+                    Console.WriteLine("Please enter your email, this is also your username");
                     email = Console.ReadLine();
                     Console.WriteLine("Please enter your password");
                     create_password = Console.ReadLine();
@@ -74,18 +74,30 @@ namespace ProjectPlanner.Classes
             return true;
         }
 
-        public void ScheduleOptions()
+        public void ProjectOptions()
         {
             bool makingSchedules = false;
             do
             {
                 string option;
-                Console.WriteLine("Press 1 to create a schedule");
+                Console.WriteLine("Press 1 to create a Project");
+                Console.WriteLine("Press 2 to add a schedule to a project");
                 option = Console.ReadLine();
                 if (option == "1")
                 {
+                    Project newProject = new Project();
+                    newProject.CreateProject();
+                    this._authenticatedUser.AddProject(newProject); // add the project to the user
+                }
+                else if (option == "2")
+                {
                     Schedule newSchedule = new Schedule();
+                    string projectName;
                     newSchedule.CreateSchedule();
+                    Console.WriteLine("Please enter the name of the Project this schedule belongs to");
+                    projectName = Console.ReadLine();
+                    Project userProject = this._authenticatedUser.GetProject(projectName);
+                    userProject.AddSchedule(newSchedule);
                 }
             } while (!makingSchedules);
         }

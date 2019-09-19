@@ -12,6 +12,11 @@
         private DateTime startDate, endDate;
         private List<Schedule> schedules;
 
+        public Project()
+        {
+            schedules = new List<Schedule>();
+        }
+
         public List<Schedule> GetSchedules()
         {
             return this.schedules;
@@ -81,6 +86,28 @@
         public void SetName(string value)
         {
             this.name = value;
+        }
+
+        public void CreateProject()
+        {
+            string name, start, end, description;
+            Console.WriteLine("Please enter the name of the project");
+            name = Console.ReadLine();
+            this.SetName(name);
+
+            Console.WriteLine("Please enter the start date of the project MM-DD-YYYY");
+            start = Console.ReadLine();
+            DateTime startDate = Convert.ToDateTime(start);
+            this.SetStartDate(startDate);
+
+            Console.WriteLine("Please enter the end date of the project MM-DD-YYYY");
+            end = Console.ReadLine();
+            DateTime endDate = Convert.ToDateTime(end);
+            this.SetStartDate(endDate);
+
+            Console.WriteLine("Please enter the description of the schedule");
+            description = Console.ReadLine();
+            this.SetDescription(description);
         }
     }
 }

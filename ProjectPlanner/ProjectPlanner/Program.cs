@@ -18,7 +18,7 @@ namespace ProjectPlanner
 
             if (loggedIn) // the user has logged in successfully 
             {
-                newUI.ScheduleOptions();
+                newUI.ProjectOptions();
             }
             
         }
