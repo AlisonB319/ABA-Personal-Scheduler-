@@ -1,4 +1,5 @@
-﻿namespace ProjectPlanner.Classes
+﻿
+namespace ProjectPlanner.Classes
 {
     using System;
     using System.Collections;
@@ -7,22 +8,21 @@
     using System.Text;
     using System.Threading.Tasks;
 
-    public class DataStore
+    class DataStore
     {
-        private Hashtable dataBase;
+        private Hashtable _dataBase;
 
         public DataStore()
         {
             this.SetDataBase(new Hashtable());
         }
-
         public Hashtable GetDataBase()
         {
-            return this.dataBase;
+            return this._dataBase;
         }
         public void SetDataBase(Hashtable value)
         {
-            this.dataBase = value;
+            this._dataBase = value;
         }
         public void AddData(string username, User account)
         {
