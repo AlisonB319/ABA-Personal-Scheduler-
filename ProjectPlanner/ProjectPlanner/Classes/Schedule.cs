@@ -11,12 +11,12 @@
     {
         private string name, client, description;
         private DateTime startDate, endDate;
-        private float hoursNeeded, hoursWorked, totalHours, percentComplete;
 
         // percentComplete = hoursWorked/totalHours
+        private float hoursNeeded, hoursWorked, totalHours, percentComplete;
 
-        // add "updatetime" function which takes in hours worked
-        // and updates hoursWorked, hoursNeeded, and percentComplete
+
+
         public string GetName()
         {
             return this.name;
