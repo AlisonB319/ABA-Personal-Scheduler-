@@ -171,11 +171,6 @@
                             Console.WriteLine("5. Edit Hours Needed");
                             Console.WriteLine("9. Exit");
 
-                            //if (choice2 == 10)
-                            //{
-                            //    Console.WriteLine("\nInvalid selection, try again\n");
-                            //}
-
                             response = Console.ReadLine();
                             choice2 = int.Parse(response);
 
