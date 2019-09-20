@@ -11,6 +11,11 @@ namespace ProjectPlanner.Classes
         private DataStore _dataStore;
         private User _authenticatedUser;
 
+        public UI()
+        {
+            _dataStore = this._dataStore = new DataStore();
+        }
+
         public void ListUsers()
         {
             foreach (object k in this._dataStore.GetDataBase().Values)
@@ -23,7 +28,6 @@ namespace ProjectPlanner.Classes
         {
             Console.Clear();
             bool loginComplete = false;
-            this._dataStore = new DataStore();
             do
             {
                 Console.WriteLine("Please enter your username, or press 1 to create an account");
@@ -74,7 +78,7 @@ namespace ProjectPlanner.Classes
             return true;
         }
 
-        public void ProjectOptions()
+        public bool ProjectOptions()
         {
             bool makingSchedules = false;
             do
@@ -85,6 +89,7 @@ namespace ProjectPlanner.Classes
                 Console.WriteLine("Press 1 to create a Project");
                 Console.WriteLine("Press 2 to add a schedule to a project");
                 Console.WriteLine("Press 3 to view your projects");
+                Console.WriteLine("Press 4 to Logout");
 
                 option = Console.ReadLine();
                 int.TryParse(option, out int op);
@@ -97,9 +102,6 @@ namespace ProjectPlanner.Classes
                 }
                 else if (op == 2)
                 {
-
-                    int projNum = 0;
-
                     int projCount = _authenticatedUser.DisplayProjects();
 
                     Console.WriteLine("Select which project you want to add a schedule to?\n");
@@ -129,8 +131,14 @@ namespace ProjectPlanner.Classes
                 {
                     _authenticatedUser.OpenProjects();
                 }
+                else if (op == 4)
+                {
+                    makingSchedules = true;
+                    _authenticatedUser = null;
+                    Console.WriteLine("You have been successfully logged out");
+                }
             } while (!makingSchedules);
+            return true;
         }
-
     }
 }
