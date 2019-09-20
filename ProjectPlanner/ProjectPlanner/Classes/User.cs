@@ -28,7 +28,7 @@ namespace ProjectPlanner.Classes
             return this._password;
         }
 
-        private List<Project> GetListProjects()
+        public List<Project> GetListProjects()
         {
             return this._projects;
         }
@@ -99,8 +99,12 @@ namespace ProjectPlanner.Classes
             foreach (Project project in this._projects)
             {
                 projectCount++;
-                Console.WriteLine("Project {0}: {1}", projectCount, project.GetName());
-                Console.WriteLine("\t{0}", project.GetDescription());
+                Console.WriteLine("\nProject {0}: {1}", projectCount, project.GetName());
+                Console.WriteLine("Description: {0}", project.GetDescription());
+                Console.WriteLine("Start Date: {0}", project.GetStartDate().Date);
+                Console.WriteLine("End Date: {0}", project.GetEndDate().Date);
+
+                Console.WriteLine("Number of schedules: {0}", project.GetSchedules().Count());
                 Console.Write("\n");
 
             }
@@ -110,6 +114,12 @@ namespace ProjectPlanner.Classes
         public void OpenProjects()
         {
             
+            if (this.GetListProjects().Count() == 0)
+            {
+                Console.WriteLine("Whoops! You don't have any projects! Please create a project first.");
+                return;
+            }
+
             int projectCount = 0;
 
             while (true)
@@ -119,7 +129,7 @@ namespace ProjectPlanner.Classes
                 Console.WriteLine("Enter the number of the project whose schedule's you would like to view");
                 Console.WriteLine("Enter 0 to return to the menu");
                 string response = Console.ReadLine();
-                int choice = int.Parse(response);
+                int.TryParse(response, out int choice);
                 if (choice == 0)
                     return;
                 else

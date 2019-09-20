@@ -88,6 +88,7 @@
             this.name = value;
         }
 
+
         public void CreateProject()
         {
             string name, start, end, description;
@@ -103,9 +104,9 @@
             Console.WriteLine("Please enter the end date of the project MM-DD-YYYY");
             end = Console.ReadLine();
             DateTime endDate = Convert.ToDateTime(end);
-            this.SetStartDate(endDate);
+            this.SetEndDate(endDate);
 
-            Console.WriteLine("Please enter the description of the schedule");
+            Console.WriteLine("Please enter the description of the project");
             description = Console.ReadLine();
             this.SetDescription(description);
         }
@@ -116,12 +117,13 @@
             foreach (Schedule schedule in this.schedules)
             {
                 scheduleCount++;
-                Console.WriteLine("Schedule {0}: {1}", scheduleCount, schedule.GetName());
-                Console.WriteLine("\t{0}", schedule.GetDescription());
-                Console.WriteLine("\tStart Date: {0}", schedule.GetStartDate());
-                Console.WriteLine("\tEnd Date: {0}", schedule.GetEndDate());
+                Console.WriteLine("\nSchedule {0}: {1}", scheduleCount, schedule.GetName());
+                Console.WriteLine("Description: {0}", schedule.GetDescription());
+                Console.WriteLine("\tStart Date: {0}", schedule.GetStartDate().Date);
+                Console.WriteLine("\tEnd Date: {0}", schedule.GetEndDate().Date);
                 Console.WriteLine("\tHours Needed: {0}", schedule.GetHoursNeeded());
                 Console.WriteLine("\tHours Worked: {0}", schedule.GetHoursWorked());
+                Console.WriteLine("\tPercentComplete: {0}", schedule.GetPercentComplete());
                 Console.Write("\n");
             }
             return scheduleCount;
@@ -132,6 +134,18 @@
             while (true)
             {
                 Console.Clear();
+                if (this.GetSchedules().Count() == 0)
+                {
+                    Console.WriteLine("There are no schedules for this project.");
+                    Console.WriteLine("If you would like to add a schedule, press 'c'\nElse, press any other key");
+                    string key = Console.ReadLine();
+                    if (key == "c") {
+                        Schedule newSchedule = new Schedule();
+                        newSchedule.CreateSchedule();
+                        this.AddSchedule(newSchedule);
+                    }
+                    return;
+                }
                 int scheduleCount = this.DisplaySchedules();
                 Console.WriteLine("Enter the number of the Schedule you would like to edit");
                 Console.WriteLine("Enter 0 to return to the menu");
@@ -150,14 +164,12 @@
                         {
                             Console.Clear();
                             Console.WriteLine("Editing Schedule: {0}", schedule.GetName());
-                            Console.WriteLine("\n\n1. Edit Hours Needed");
-                            Console.WriteLine("2. Edit Hours Worked");
+                            Console.WriteLine("\n\n1. Edit Name");
+                            Console.WriteLine("2. Edit Description");
+                            Console.WriteLine("3. Edit Start Date");
+                            Console.WriteLine("4. Edit End Date");
+                            Console.WriteLine("5. Edit Hours Needed");
                             Console.WriteLine("9. Exit");
-
-                            if (choice2 == 10)
-                            {
-                                Console.WriteLine("\nInvalid selection, try again\n");
-                            }
 
                             response = Console.ReadLine();
                             choice2 = int.Parse(response);
@@ -165,17 +177,60 @@
                             switch (choice2)
                             {
                                 case 1:
-                                    Console.WriteLine("Edit Hours Needed, Press any key to continue");
-                                    Console.ReadKey();
+                                    Console.WriteLine("Editing Schedule name");
+                                    Console.WriteLine("Current Name: {0}", schedule.GetName());
+                                    Console.Write("New Name: ");
+                                    string newName = Console.ReadLine();
+                                    schedule.SetName(newName);
+                                    Console.WriteLine("Done.");
                                     break;
+
                                 case 2:
-                                    Console.WriteLine("Edit Hours Worked, Press any key to continue");
-                                    Console.ReadKey();
+                                    Console.WriteLine("Editing Schedule Description.");
+                                    Console.WriteLine("Current Description: {0}", schedule.GetDescription());
+                                    Console.Write("New Description: ");
+                                    string newDescription = Console.ReadLine();
+                                    schedule.SetDescription(newDescription);
+                                    Console.WriteLine("Done.");
+                                    break;
+
+                                case 3:
+                                    Console.WriteLine("Editing Start Date");
+                                    Console.WriteLine("Current Start Date: {0}", schedule.GetStartDate().Date);
+                                    Console.Write("New Start Date (MM-DD-YYYY): ");
+                                    string input = Console.ReadLine();
+                                    DateTime.TryParse(input, out DateTime newDate);
+                                    schedule.SetStartDate(newDate);
+                                    Console.WriteLine("Done.");
+                                    break;
+                                case 4:
+                                    Console.WriteLine("Editing End Date");
+                                    Console.WriteLine("Current End Date: {0}", schedule.GetEndDate().Date);
+                                    Console.Write("New End Date (MM-DD-YYYY): ");
+                                    input = Console.ReadLine();
+                                    DateTime.TryParse(input, out newDate);
+                                    schedule.SetEndDate(newDate);
+                                    Console.WriteLine("Done.");
+                                    break;
+                                case 5:
+                                    Console.WriteLine("Editing Hours Needed");
+                                    Console.WriteLine("Current Hours Needed: {0}", schedule.GetHoursNeeded());
+                                    Console.Write("New Hours Needed: ");
+                                    input = Console.ReadLine();
+                                    float.TryParse(input, out float newHours);
+                                    schedule.SetHoursNeeded(newHours);
+
+                                    // updating total hours and percent complete too
+                                    schedule.UpdateTotalHours();
+                                    schedule.UpdatePercentComplete();
+
+                                    Console.WriteLine("Done.");
                                     break;
                                 case 9:
                                     break;
                                 default:
-                                    choice2 = 10;
+                                    Console.WriteLine("Invalid selection, try again.");
+                                    choice2 = 0;
                                     break;
                             }
                         } while (choice2 != 9);

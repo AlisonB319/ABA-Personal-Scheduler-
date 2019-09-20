@@ -11,8 +11,12 @@
     {
         private string name, client, description;
         private DateTime startDate, endDate;
-        private float hoursNeeded, hoursWorked, percentComplete;
+        private float hoursNeeded, hoursWorked, totalHours, percentComplete;
 
+        // percentComplete = hoursWorked/totalHours
+
+        // add "updatetime" function which takes in hours worked
+        // and updates hoursWorked, hoursNeeded, and percentComplete
         public string GetName()
         {
             return this.name;
@@ -92,6 +96,24 @@
             this.percentComplete = value;
         }
 
+        public float GetTotalHours()
+        {
+            return this.totalHours;
+        }
+        public void SetTotalHours(float val)
+        {
+            this.totalHours = val;
+        }
+
+        public void UpdateTotalHours()
+        {
+            this.SetTotalHours(this.GetHoursNeeded() + this.GetHoursWorked());
+        }
+
+        public void UpdatePercentComplete()
+        {
+            this.SetPercentComplete(this.GetHoursWorked() / this.GetTotalHours());
+        }
         public void CreateSchedule()
         {
             string name, client, start, end, hoursNeeded, hoursWorked, description;
@@ -112,7 +134,7 @@
             Console.WriteLine("Please enter the end date of the schedule MM-DD-YYYY");
             end = Console.ReadLine();
             DateTime endDate = Convert.ToDateTime(end);
-            this.SetStartDate(endDate);
+            this.SetEndDate(endDate);
 
             Console.WriteLine("Please enter hours needed, partial hours are excepted ex: 4.3");
             hoursNeeded = Console.ReadLine();
@@ -123,6 +145,8 @@
             hoursWorked = Console.ReadLine();
             float fHoursWorked = float.Parse(hoursWorked, CultureInfo.InvariantCulture.NumberFormat);
             this.SetHoursWorked(fHoursWorked);
+            this.SetTotalHours(fHoursNeeded + fHoursNeeded);
+            this.SetPercentComplete(fHoursWorked / this.GetTotalHours());
 
             Console.WriteLine("Please enter the description of the schedule");
             description = Console.ReadLine();

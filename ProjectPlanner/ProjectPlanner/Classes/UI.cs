@@ -81,33 +81,56 @@ namespace ProjectPlanner.Classes
             {
                 Console.Clear();
                 string option;
+
                 Console.WriteLine("Press 1 to create a Project");
                 Console.WriteLine("Press 2 to add a schedule to a project");
                 Console.WriteLine("Press 3 to view your projects");
+
                 option = Console.ReadLine();
-                if (option == "1")
+                int.TryParse(option, out int op);
+
+                if (op == 1)
                 {
                     Project newProject = new Project();
                     newProject.CreateProject();
                     this._authenticatedUser.AddProject(newProject); // add the project to the user
                 }
-                else if (option == "2")
+                else if (op == 2)
                 {
-                    Schedule newSchedule = new Schedule();
-                    string projectName;
-                    newSchedule.CreateSchedule();
-                    // We probably want some kind of menu option to determine which project to choose
-                    Console.WriteLine("Please enter the name of the Project this schedule belongs to");
-                    projectName = Console.ReadLine();
-                    Project userProject = this._authenticatedUser.GetProject(projectName);
-                    userProject.AddSchedule(newSchedule);
-                    // *******************************************************************************
+
+                    int projNum = 0;
+
+                    int projCount = _authenticatedUser.DisplayProjects();
+
+                    Console.WriteLine("Select which project you want to add a schedule to?\n");
+                    Console.WriteLine("Enter 0 to return to the menu");
+                    string response = Console.ReadLine();
+                    int.TryParse(response, out op);
+
+                    if (op == 0)
+                    {
+                        continue;
+                    } else
+                    {
+
+                        if (op <= projCount)
+                        {
+                            op--;
+                            Project project = _authenticatedUser.GetListProjects()[op];
+
+                            Schedule newSchedule = new Schedule();
+                            newSchedule.CreateSchedule();
+                            project.AddSchedule(newSchedule);
+                        }
+
+                    }
                 }
-                else if (option == "3")
+                else if (op == 3)
                 {
                     _authenticatedUser.OpenProjects();
                 }
             } while (!makingSchedules);
         }
+
     }
 }
