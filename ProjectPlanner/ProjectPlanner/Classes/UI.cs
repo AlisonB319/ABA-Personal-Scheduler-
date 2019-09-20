@@ -79,9 +79,11 @@ namespace ProjectPlanner.Classes
             bool makingSchedules = false;
             do
             {
+                Console.Clear();
                 string option;
                 Console.WriteLine("Press 1 to create a Project");
                 Console.WriteLine("Press 2 to add a schedule to a project");
+                Console.WriteLine("Press 3 to view your projects");
                 option = Console.ReadLine();
                 if (option == "1")
                 {
@@ -98,6 +100,10 @@ namespace ProjectPlanner.Classes
                     projectName = Console.ReadLine();
                     Project userProject = this._authenticatedUser.GetProject(projectName);
                     userProject.AddSchedule(newSchedule);
+                }
+                else if (option == "3")
+                {
+                    _authenticatedUser.OpenProjects();
                 }
             } while (!makingSchedules);
         }
