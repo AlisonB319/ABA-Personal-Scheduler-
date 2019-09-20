@@ -12,15 +12,23 @@ namespace ProjectPlanner
     {
         static void Main(string[] args)
         {
+            bool scheduleMakerRunning = false;
             UI newUI = new UI();
-            bool loggedIn;
-            loggedIn = newUI.LogIn();
-
-            if (loggedIn) // the user has logged in successfully 
+            do
             {
-                newUI.ProjectOptions();
-            }
-            
+                bool loggedIn = newUI.LogIn();
+                if (loggedIn) // the user has logged in successfully 
+                {
+                    newUI.ProjectOptions();
+                }
+
+                Console.WriteLine("Press 1 to Quit, or any key to continue");
+                string keyInput = Console.ReadLine();
+                if (keyInput == "1")
+                {
+                    scheduleMakerRunning = true;
+                }
+            } while (!scheduleMakerRunning);
         }
     }
 }
