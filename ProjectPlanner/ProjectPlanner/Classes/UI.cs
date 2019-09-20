@@ -97,14 +97,36 @@ namespace ProjectPlanner.Classes
                 }
                 else if (op == 2)
                 {
-                    Schedule newSchedule = new Schedule();
-                    string projectName;
-                    newSchedule.CreateSchedule();
-                    // We probably want some kind of menu option to determine which project to choose
-                    Console.WriteLine("Please enter the name of the Project this schedule belongs to");
-                    projectName = Console.ReadLine();
-                    Project userProject = this._authenticatedUser.GetProject(projectName);
-                    userProject.AddSchedule(newSchedule);
+
+                    int projNum = 0;
+
+                    int projCount = _authenticatedUser.DisplayProjects();
+
+                    Console.WriteLine("Select which project you want to add a schedule to?\n");
+                    Console.WriteLine("Enter 0 to return to the menu");
+                    string response = Console.ReadLine();
+                    int.TryParse(response, out op);
+
+                    if (op == 0)
+                    {
+                        continue;
+                    } else
+                    {
+
+                        if (op <= projCount)
+                        {
+                            op--;
+                            Project project = _authenticatedUser.GetListProjects()[op];
+
+                            Schedule newSchedule = new Schedule();
+                            newSchedule.CreateSchedule();
+                            project.AddSchedule(newSchedule);
+                        }
+
+                    }
+
+
+
                     // *******************************************************************************
                 }
                 else if (op == 3)

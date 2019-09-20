@@ -117,12 +117,13 @@
             foreach (Schedule schedule in this.schedules)
             {
                 scheduleCount++;
-                Console.WriteLine("Schedule {0}: {1}", scheduleCount, schedule.GetName());
-                Console.WriteLine("\t{0}", schedule.GetDescription());
+                Console.WriteLine("\nSchedule {0}: {1}", scheduleCount, schedule.GetName());
+                Console.WriteLine("Description: {0}", schedule.GetDescription());
                 Console.WriteLine("\tStart Date: {0}", schedule.GetStartDate().Date);
                 Console.WriteLine("\tEnd Date: {0}", schedule.GetEndDate().Date);
                 Console.WriteLine("\tHours Needed: {0}", schedule.GetHoursNeeded());
                 Console.WriteLine("\tHours Worked: {0}", schedule.GetHoursWorked());
+                Console.WriteLine("\tPercentComplete: {0}", schedule.GetPercentComplete());
                 Console.Write("\n");
             }
             return scheduleCount;
@@ -135,8 +136,14 @@
                 Console.Clear();
                 if (this.GetSchedules().Count() == 0)
                 {
-                    Console.WriteLine("There are no schedules for this project.\nPress any key to Continue.");
-                    Console.Read();
+                    Console.WriteLine("There are no schedules for this project.");
+                    Console.WriteLine("If you would like to add a schedule, press 'c'\nElse, press any other key");
+                    string key = Console.ReadLine();
+                    if (key == "c") {
+                        Schedule newSchedule = new Schedule();
+                        newSchedule.CreateSchedule();
+                        this.AddSchedule(newSchedule);
+                    }
                     return;
                 }
                 int scheduleCount = this.DisplaySchedules();
@@ -217,6 +224,11 @@
                                     input = Console.ReadLine();
                                     float.TryParse(input, out float newHours);
                                     schedule.SetHoursNeeded(newHours);
+
+                                    // updating total hours and percent complete too
+                                    schedule.UpdateTotalHours();
+                                    schedule.UpdatePercentComplete();
+
                                     Console.WriteLine("Done.");
                                     break;
                                 case 9:

@@ -99,9 +99,12 @@ namespace ProjectPlanner.Classes
             foreach (Project project in this._projects)
             {
                 projectCount++;
-                Console.WriteLine("Project {0}: {1}", projectCount, project.GetName());
-                Console.WriteLine("\t{0}", project.GetDescription());
-                Console.WriteLine("Number of schedules: {0}".PadLeft(20), project.GetSchedules().Count());
+                Console.WriteLine("\nProject {0}: {1}", projectCount, project.GetName());
+                Console.WriteLine("Description: {0}", project.GetDescription());
+                Console.WriteLine("Start Date: {0}", project.GetStartDate().Date);
+                Console.WriteLine("End Date: {0}", project.GetEndDate().Date);
+
+                Console.WriteLine("Number of schedules: {0}", project.GetSchedules().Count());
                 Console.Write("\n");
 
             }

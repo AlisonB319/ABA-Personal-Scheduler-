@@ -105,6 +105,15 @@
             this.totalHours = val;
         }
 
+        public void UpdateTotalHours()
+        {
+            this.SetTotalHours(this.GetHoursNeeded() + this.GetHoursWorked());
+        }
+
+        public void UpdatePercentComplete()
+        {
+            this.SetPercentComplete(this.GetHoursWorked() / this.GetTotalHours());
+        }
         public void CreateSchedule()
         {
             string name, client, start, end, hoursNeeded, hoursWorked, description;
