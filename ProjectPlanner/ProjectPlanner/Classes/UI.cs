@@ -80,26 +80,62 @@ namespace ProjectPlanner.Classes
             do
             {
                 string option;
-                Console.WriteLine("Press 1 to create a Project");
-                Console.WriteLine("Press 2 to add a schedule to a project");
+                Console.WriteLine("Press 1 to view your current projects.");
+                Console.WriteLine("Press 2 to create a project");
+                Console.WriteLine("Press 3 to select a project to view the schedules of.");
+                Console.WriteLine("Press 4 to add a schedule to a project");
                 option = Console.ReadLine();
-                if (option == "1")
+                int.TryParse(option, out int op);
+                switch(op)
                 {
-                    Project newProject = new Project();
-                    newProject.CreateProject();
-                    this._authenticatedUser.AddProject(newProject); // add the project to the user
-                }
-                else if (option == "2")
-                {
-                    Schedule newSchedule = new Schedule();
-                    string projectName;
-                    newSchedule.CreateSchedule();
-                    Console.WriteLine("Please enter the name of the Project this schedule belongs to");
-                    projectName = Console.ReadLine();
-                    Project userProject = this._authenticatedUser.GetProject(projectName);
-                    userProject.AddSchedule(newSchedule);
-                }
+                    case 1:
+                        foreach(Project item in this._authenticatedUser.GetListProjects())
+                        {
+                            item.PrintAttributes();
+                            Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                        }
+                        break;
+                    case 2:
+
+                        Project newProject = new Project();
+                        newProject.CreateProject();
+                        this._authenticatedUser.AddProject(newProject); // add the project to the user
+
+                        break;
+                    case 3:
+                        int i = 1;
+                        foreach(Project item in _authenticatedUser.GetListProjects())
+                        {
+                            Console.WriteLine("{0}: {1}");
+                            i++;
+                        }
+                        int.TryParse(Console.ReadLine(), out int answer);
+                        this._authenticatedUser.GetListProjects().ElementAt(answer-1).PrintSchedules();
+
+                        break;
+
+                    case 4:
+                        Schedule newSchedule = new Schedule();
+                        string projectName;
+                        newSchedule.CreateSchedule();
+                        Console.WriteLine("Please enter the name of the Project this schedule belongs to");
+                        projectName = Console.ReadLine();
+                        Project userProject = this._authenticatedUser.GetProject(projectName);
+                        userProject.AddSchedule(newSchedule);
+
+                        break;
+                    default:
+                        Console.WriteLine("Invalid input");
+                        break;
+                };
+
             } while (!makingSchedules);
         }
+
+        // create a hello screen which welcomes the user
+
+        // configure the menu to allow the user to list their projects, and view the project's schedules.
+
+        // when adding schedule, first select project from list
     }
 }

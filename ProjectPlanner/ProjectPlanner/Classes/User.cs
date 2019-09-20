@@ -29,7 +29,7 @@ namespace ProjectPlanner.Classes
             return this._password;
         }
 
-        private List<Project> GetListProjects()
+        public List<Project> GetListProjects()
         {
             return this._projects;
         }

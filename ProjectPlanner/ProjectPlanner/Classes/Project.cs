@@ -88,6 +88,25 @@
             this.name = value;
         }
 
+        public void PrintAttributes()
+        {
+            Console.WriteLine("\nProject title:\t{0}", this.name);
+            Console.WriteLine("Description:\t{0}", this.description);
+            Console.WriteLine("Start:\t{0}", this.startDate.ToString());
+            Console.WriteLine("End:/t{0}", this.endDate.ToString());
+
+            Console.WriteLine("Number of schedules:\t{0}\n", this.schedules.Count());
+        }
+
+        public void PrintSchedules()
+        {
+            foreach(Schedule item in this.schedules)
+            {
+                item.PrintAttributes();
+                Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+            }
+        }
+
         public void CreateProject()
         {
             string name, start, end, description;
@@ -103,9 +122,9 @@
             Console.WriteLine("Please enter the end date of the project MM-DD-YYYY");
             end = Console.ReadLine();
             DateTime endDate = Convert.ToDateTime(end);
-            this.SetStartDate(endDate);
+            this.SetEndDate(endDate);
 
-            Console.WriteLine("Please enter the description of the schedule");
+            Console.WriteLine("Please enter the description of the project");
             description = Console.ReadLine();
             this.SetDescription(description);
         }
