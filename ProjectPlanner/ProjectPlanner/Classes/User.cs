@@ -61,6 +61,11 @@ namespace ProjectPlanner.Classes
             return this._projects.Remove(toRemove);
         }
 
+        private bool RemoveProject(Project project)
+        {
+            return this._projects.Remove(project);
+        }
+
         private void SetProjects(List<Project> value)
         {
             this._projects = value;
@@ -126,19 +131,31 @@ namespace ProjectPlanner.Classes
             {
                 Console.Clear();
                 projectCount = DisplayProjects();
-                Console.WriteLine("Enter the number of the project whose schedule's you would like to view");
+
+                Console.WriteLine("Enter 1 to select a project's schedules to view");
+                Console.WriteLine("Enter 2 to select a project to delete");
                 Console.WriteLine("Enter 0 to return to the menu");
+
                 string response = Console.ReadLine();
                 int.TryParse(response, out int choice);
+                Console.Clear();
+
                 if (choice == 0)
                     return;
-                else
+                else if (choice == 1 || choice == 2)
                 {
-                    if (choice <= projectCount)
+                    projectCount = DisplayProjects();
+                    if (choice == 1) Console.WriteLine("Enter the number of the project whose schedule's you would like to view");
+                    if (choice == 2) Console.WriteLine("Enter the number of the project to delete.");
+                    string input = Console.ReadLine();
+                    int.TryParse(input, out int op);
+
+                    if (op <= projectCount)
                     {
-                        choice--;
-                        Project project = this._projects[choice];
-                        project.ViewSchedules();
+                        op--;
+                        Project project = this._projects[op];
+                        if (choice == 1) project.ViewSchedules();
+                        if (choice == 2) this.RemoveProject(project);
                     }
                 }
             }
