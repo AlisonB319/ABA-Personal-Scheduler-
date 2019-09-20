@@ -15,24 +15,12 @@
 
         // percentComplete = hoursWorked/totalHours
 
-        public void PrintAttributes()
-        {
-            Console.WriteLine("Schedule Name:\t{}", this.name);
-            Console.WriteLine("Client:\t{}", this.client);
-            Console.WriteLine("Description:\t{}", this.description);
-            Console.WriteLine("Start:\t{}", startDate.ToString());
-            Console.WriteLine("End:\t{}", endDate.ToString());
-            Console.WriteLine("Hours worked: {0}\tHours needed: {1}\t Percent complete: {2}", hoursWorked, hoursNeeded, percentComplete);
-
-
-        }
         // add "updatetime" function which takes in hours worked
         // and updates hoursWorked, hoursNeeded, and percentComplete
         public string GetName()
         {
             return this.name;
         }
-
         public void SetName(string value)
         {
             this.name = value;
@@ -137,7 +125,7 @@
             Console.WriteLine("Please enter the end date of the schedule MM-DD-YYYY");
             end = Console.ReadLine();
             DateTime endDate = Convert.ToDateTime(end);
-            this.SetStartDate(endDate);
+            this.SetEndDate(endDate);
 
             Console.WriteLine("Please enter hours needed, partial hours are excepted ex: 4.3");
             hoursNeeded = Console.ReadLine();

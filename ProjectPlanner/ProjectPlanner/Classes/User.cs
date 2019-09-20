@@ -18,7 +18,6 @@ namespace ProjectPlanner.Classes
             _projects = new List<Project>();
         }
 
-
         private string Getemail()
         {
             return this._email;
@@ -93,5 +92,53 @@ namespace ProjectPlanner.Classes
             }
             return false;
         }
+
+        public int DisplayProjects()
+        {
+            int projectCount = 0;
+            foreach (Project project in this._projects)
+            {
+                projectCount++;
+                Console.WriteLine("Project {0}: {1}", projectCount, project.GetName());
+                Console.WriteLine("\t{0}", project.GetDescription());
+                Console.WriteLine("Number of schedules: {0}".PadLeft(20), project.GetSchedules().Count());
+                Console.Write("\n");
+
+            }
+            return projectCount;
+        }
+
+        public void OpenProjects()
+        {
+            
+            if (this.GetListProjects().Count() == 0)
+            {
+                Console.WriteLine("Whoops! You don't have any projects! Please create a project first.");
+                return;
+            }
+
+            int projectCount = 0;
+
+            while (true)
+            {
+                Console.Clear();
+                projectCount = DisplayProjects();
+                Console.WriteLine("Enter the number of the project whose schedule's you would like to view");
+                Console.WriteLine("Enter 0 to return to the menu");
+                string response = Console.ReadLine();
+                int.TryParse(response, out int choice);
+                if (choice == 0)
+                    return;
+                else
+                {
+                    if (choice <= projectCount)
+                    {
+                        choice--;
+                        Project project = this._projects[choice];
+                        project.ViewSchedules();
+                    }
+                }
+            }
+        } 
     }
 }
