@@ -17,7 +17,6 @@
         {
             return this.name;
         }
-
         public void SetName(string value)
         {
             this.name = value;

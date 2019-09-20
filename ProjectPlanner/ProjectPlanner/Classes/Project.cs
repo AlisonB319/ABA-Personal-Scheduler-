@@ -109,5 +109,80 @@
             description = Console.ReadLine();
             this.SetDescription(description);
         }
+
+        public int DisplaySchedules()
+        {
+            int scheduleCount = 0;
+            foreach (Schedule schedule in this.schedules)
+            {
+                scheduleCount++;
+                Console.WriteLine("Schedule {0}: {1}", scheduleCount, schedule.GetName());
+                Console.WriteLine("\t{0}", schedule.GetDescription());
+                Console.WriteLine("\tStart Date: {0}", schedule.GetStartDate());
+                Console.WriteLine("\tEnd Date: {0}", schedule.GetEndDate());
+                Console.WriteLine("\tHours Needed: {0}", schedule.GetHoursNeeded());
+                Console.WriteLine("\tHours Worked: {0}", schedule.GetHoursWorked());
+                Console.Write("\n");
+            }
+            return scheduleCount;
+        }
+
+        public void ViewSchedules()
+        {
+            while (true)
+            {
+                Console.Clear();
+                int scheduleCount = this.DisplaySchedules();
+                Console.WriteLine("Enter the number of the Schedule you would like to edit");
+                Console.WriteLine("Enter 0 to return to the menu");
+                string response = Console.ReadLine();
+                int choice = int.Parse(response);
+                if (choice == 0)
+                    return;
+                else
+                {
+                    if (choice <= scheduleCount)
+                    {
+                        choice--;
+                        Schedule schedule = this.schedules[choice];
+                        int choice2 = 0;
+                        do
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Editing Schedule: {0}", schedule.GetName());
+                            Console.WriteLine("\n\n1. Edit Hours Needed");
+                            Console.WriteLine("2. Edit Hours Worked");
+                            Console.WriteLine("9. Exit");
+
+                            if (choice2 == 10)
+                            {
+                                Console.WriteLine("\nInvalid selection, try again\n");
+                            }
+
+                            response = Console.ReadLine();
+                            choice2 = int.Parse(response);
+
+                            switch (choice2)
+                            {
+                                case 1:
+                                    Console.WriteLine("Edit Hours Needed, Press any key to continue");
+                                    Console.ReadKey();
+                                    break;
+                                case 2:
+                                    Console.WriteLine("Edit Hours Worked, Press any key to continue");
+                                    Console.ReadKey();
+                                    break;
+                                case 9:
+                                    break;
+                                default:
+                                    choice2 = 10;
+                                    break;
+                            }
+                        } while (choice2 != 9);
+                    }
+                }
+                
+            }
+        }
     }
 }

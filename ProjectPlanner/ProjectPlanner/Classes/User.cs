@@ -93,5 +93,52 @@ namespace ProjectPlanner.Classes
             }
             return false;
         }
+
+        public int DisplayProjects()
+        {
+            int projectCount = 0;
+            foreach (Project project in this._projects)
+            {
+                projectCount++;
+                Console.WriteLine("Project {0}: {1}", projectCount, project.GetName());
+                Console.WriteLine("\t{0}", project.GetDescription());
+                Console.Write("\n");
+
+            }
+            return projectCount;
+        }
+
+        public void OpenProjects()
+        {
+            
+            int projectCount = 0;
+            
+            while (true)
+            {
+                Console.Clear();
+                projectCount = DisplayProjects();
+                Console.WriteLine("Enter the number of the project whose schedule's you would like to view");
+                Console.WriteLine("Enter 0 to return to the menu");
+                string response = Console.ReadLine();
+                int choice = int.Parse(response);
+                if (choice == 0)
+                    return;
+                else
+                {
+                    if (choice <= projectCount)
+                    {
+                        choice--;
+                        Project project = this._projects[choice];
+                        project.ViewSchedules();
+                    }
+                }
+
+            }
+
+
+        }
+
+        
+        
     }
 }
