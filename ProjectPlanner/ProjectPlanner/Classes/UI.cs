@@ -96,10 +96,12 @@ namespace ProjectPlanner.Classes
                     Schedule newSchedule = new Schedule();
                     string projectName;
                     newSchedule.CreateSchedule();
+                    // We probably want some kind of menu option to determine which project to choose
                     Console.WriteLine("Please enter the name of the Project this schedule belongs to");
                     projectName = Console.ReadLine();
                     Project userProject = this._authenticatedUser.GetProject(projectName);
                     userProject.AddSchedule(newSchedule);
+                    // *******************************************************************************
                 }
                 else if (option == "3")
                 {

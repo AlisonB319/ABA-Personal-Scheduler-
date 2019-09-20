@@ -18,7 +18,6 @@ namespace ProjectPlanner.Classes
             _projects = new List<Project>();
         }
 
-
         private string Getemail()
         {
             return this._email;
@@ -112,7 +111,7 @@ namespace ProjectPlanner.Classes
         {
             
             int projectCount = 0;
-            
+
             while (true)
             {
                 Console.Clear();
@@ -132,13 +131,7 @@ namespace ProjectPlanner.Classes
                         project.ViewSchedules();
                     }
                 }
-
             }
-
-
-        }
-
-        
-        
+        } 
     }
 }
