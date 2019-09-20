@@ -124,10 +124,6 @@ namespace ProjectPlanner.Classes
                         }
 
                     }
-
-
-
-                    // *******************************************************************************
                 }
                 else if (op == 3)
                 {
@@ -136,10 +132,5 @@ namespace ProjectPlanner.Classes
             } while (!makingSchedules);
         }
 
-        // create a hello screen which welcomes the user
-
-        // configure the menu to allow the user to list their projects, and view the project's schedules.
-
-        // when adding schedule, first select project from list
     }
 }
