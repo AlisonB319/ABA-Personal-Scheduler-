@@ -16,18 +16,22 @@ namespace ProjectPlanner.Classes
         {
             this.SetDataBase(new Hashtable());
         }
+
         public Hashtable GetDataBase()
         {
             return this._dataBase;
         }
+
         public void SetDataBase(Hashtable value)
         {
             this._dataBase = value;
         }
+
         public void AddData(string username, User account)
         {
             this._dataBase.Add(username, account);
         }
+
         public bool AuthenticateUsername(string username)
         {
             if (this._dataBase.ContainsKey(username))
@@ -36,11 +40,13 @@ namespace ProjectPlanner.Classes
             }
             return false;
         }
+
         public bool AuthenticatePassword(string username, string password)
         {
             User userClass = (User)this._dataBase[username];
             return userClass.AuthenticatePassword(password);
         }
+
         public User getAuthenticatedUser(string username, string password)
         {
             return (User)this._dataBase[username];

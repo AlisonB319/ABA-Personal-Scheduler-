@@ -103,6 +103,7 @@ namespace ProjectPlanner.Classes
                 Console.WriteLine("Press 2 to add a schedule to a project");
                 Console.WriteLine("Press 3 to view your projects");
                 Console.WriteLine("Press 4 to Logout");
+                Console.WriteLine("Press 9 to send a test email");
 
                 option = Console.ReadLine();
                 int.TryParse(option, out int op);
@@ -149,6 +150,13 @@ namespace ProjectPlanner.Classes
                     makingSchedules = true;
                     _authenticatedUser = null;
                     Console.WriteLine("You have been successfully logged out");
+                }
+                else if (op == 9)
+                {
+                    Email email = new Email();
+                    Console.Write("Enter the email you would like to send to: ");
+                    string response = Console.ReadLine();
+                    email.EmailTest(response);
                 }
             } while (!makingSchedules);
             return true;
