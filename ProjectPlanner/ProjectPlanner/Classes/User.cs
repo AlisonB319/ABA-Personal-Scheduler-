@@ -71,12 +71,12 @@ namespace ProjectPlanner.Classes
             this._projects = value;
         }
 
-        private string GetLastName()
+        public string GetLastName()
         {
             return this._lastName;
         }
 
-        private string GetFirstName()
+        public string GetFirstName()
         {
             return this._firstName;
         }
@@ -133,7 +133,8 @@ namespace ProjectPlanner.Classes
                 projectCount = DisplayProjects();
 
                 Console.WriteLine("Enter 1 to select a project's schedules to view");
-                Console.WriteLine("Enter 2 to select a project to delete");
+                Console.WriteLine("Enter 2 to select a project to edit.");
+                Console.WriteLine("Enter 3 to select a project to delete");
                 Console.WriteLine("Enter 0 to return to the menu");
 
                 string response = Console.ReadLine();
@@ -142,11 +143,17 @@ namespace ProjectPlanner.Classes
 
                 if (choice == 0)
                     return;
-                else if (choice == 1 || choice == 2)
+                else if (choice >= 1 && choice <= 3)
                 {
                     projectCount = DisplayProjects();
-                    if (choice == 1) Console.WriteLine("Enter the number of the project whose schedule's you would like to view");
-                    if (choice == 2) Console.WriteLine("Enter the number of the project to delete.");
+
+                    if (choice == 1)
+                        Console.WriteLine("Enter the number of the project whose schedule's you would like to view");
+                    if (choice == 2)
+                        Console.WriteLine("Enter the number of the project to edit.");
+                    if (choice == 3)
+                        Console.WriteLine("Enter the number of the project to delete.");
+
                     string input = Console.ReadLine();
                     int.TryParse(input, out int op);
 
@@ -154,11 +161,67 @@ namespace ProjectPlanner.Classes
                     {
                         op--;
                         Project project = this._projects[op];
-                        if (choice == 1) project.ViewSchedules();
-                        if (choice == 2) this.RemoveProject(project);
+                        if (choice == 1)
+                            project.ViewSchedules();
+                        if (choice == 2)
+                            this.EditProject(project);
+                        if (choice == 3)
+                            this.RemoveProject(project);
                     }
                 }
             }
         } 
+        private void EditProject(Project project)
+        {
+            bool running = true;
+
+            while (running)
+            {
+
+                Console.Clear();
+
+                project.DisplayAttributes();
+
+                Console.WriteLine("\n1. Edit name");
+                Console.WriteLine("2. Edit description");
+                Console.WriteLine("3. Edit start date ");
+                Console.WriteLine("4. Edit end date");
+                Console.WriteLine("0: Exit");
+                string input = Console.ReadLine();
+                int.TryParse(input, out int op);
+
+                switch (op) {
+                    case 1:
+                        Console.WriteLine("Editing Project Name");
+                        Console.Write("New name: ");
+                        input = Console.ReadLine();
+                        project.SetName(input);
+                        break;
+                    case 2:
+                        Console.WriteLine("Editing Project Description");
+                        Console.Write("New Description: ");
+                        input = Console.ReadLine();
+                        project.SetDescription(input);
+                        break;
+                    case 3:
+                        Console.WriteLine("Editing Start Date");
+                        Console.Write("New Start Date: ");
+                        input = Console.ReadLine();
+                        DateTime.TryParse(input, out DateTime newDate);
+                        project.SetStartDate(newDate);
+                        break;
+                    case 4:
+                        Console.WriteLine("Editing End Date");
+                        Console.Write("New End Date:");
+                        input = Console.ReadLine();
+                        DateTime.TryParse(input, out newDate);
+                        project.SetEndDate(newDate);
+                        break;
+                    case 0:
+                        return;
+                };
+            }
+
+        }
     }
 }

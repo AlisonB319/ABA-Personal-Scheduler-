@@ -27,6 +27,13 @@
             this.schedules = value;
         }
 
+        public void DisplayAttributes()
+        {
+            Console.WriteLine("Project Name: {0}", this.name);
+            Console.WriteLine("\tDescription: {0}", this.description);
+            Console.WriteLine("\tStart Date: {0}", this.startDate.Date);
+            Console.WriteLine("\tEnd Date: {0}", this.endDate.Date);
+        }
         public void AddSchedule(Schedule val)
         {
             this.schedules.Add(val);
@@ -98,12 +105,12 @@
 
             Console.WriteLine("Please enter the start date of the project MM-DD-YYYY");
             start = Console.ReadLine();
-            DateTime startDate = Convert.ToDateTime(start);
+            DateTime.TryParse(start, out DateTime startDate);
             this.SetStartDate(startDate);
 
             Console.WriteLine("Please enter the end date of the project MM-DD-YYYY");
             end = Console.ReadLine();
-            DateTime endDate = Convert.ToDateTime(end);
+            DateTime.TryParse(end, out DateTime endTime);
             this.SetEndDate(endDate);
 
             Console.WriteLine("Please enter the description of the project");

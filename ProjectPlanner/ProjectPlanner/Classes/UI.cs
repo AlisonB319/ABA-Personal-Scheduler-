@@ -75,7 +75,19 @@ namespace ProjectPlanner.Classes
                     continue;
                 }
             } while (!loginComplete);
+            this.Welcome();
             return true;
+        }
+
+        private void Welcome()
+        {
+            Console.Clear();
+
+            Console.WriteLine("~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~\n");
+            Console.WriteLine("\tWelcome {0} {1}! \n", this._authenticatedUser.GetFirstName(), this._authenticatedUser.GetLastName());
+            Console.WriteLine("\tPress any key to continue \n");
+            Console.WriteLine("~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~\n");
+            Console.ReadKey();
         }
 
         public bool ProjectOptions()
@@ -86,6 +98,7 @@ namespace ProjectPlanner.Classes
                 Console.Clear();
                 string option;
 
+                Console.WriteLine("         MAIN MENU         \n");
                 Console.WriteLine("Press 1 to create a Project");
                 Console.WriteLine("Press 2 to add a schedule to a project");
                 Console.WriteLine("Press 3 to view your projects");
