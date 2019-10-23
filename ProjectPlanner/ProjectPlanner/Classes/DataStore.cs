@@ -10,19 +10,19 @@ namespace ProjectPlanner.Classes
 
     class DataStore
     {
-        private Hashtable _dataBase;
+        private Dictionary<string, User> _dataBase;
 
         public DataStore()
         {
-            this.SetDataBase(new Hashtable());
+            _dataBase = new Dictionary<string, User>();
         }
 
-        public Hashtable GetDataBase()
+        public Dictionary<string, User> GetDataBase()
         {
             return this._dataBase;
         }
 
-        public void SetDataBase(Hashtable value)
+        public void SetDataBase(Dictionary<string, User> value)
         {
             this._dataBase = value;
         }
@@ -43,7 +43,7 @@ namespace ProjectPlanner.Classes
 
         public bool AuthenticatePassword(string username, string password)
         {
-            User userClass = (User)this._dataBase[username];
+            User userClass = this._dataBase[username];
             return userClass.AuthenticatePassword(password);
         }
 
@@ -51,5 +51,7 @@ namespace ProjectPlanner.Classes
         {
             return (User)this._dataBase[username];
         }
+
+
     }
 }

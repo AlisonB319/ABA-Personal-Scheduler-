@@ -7,7 +7,7 @@ namespace ProjectPlanner.Classes
     using System.Threading.Tasks;
 
 
-    class User
+    public class User
     {
         private string _firstName, _lastName, _email, _password;
 
@@ -89,7 +89,7 @@ namespace ProjectPlanner.Classes
             this._password = password;
         }
         
-        public bool AuthenticatePassword(string password)
+        public virtual bool AuthenticatePassword(string password)
         {
             if (this._password == password)
             {
