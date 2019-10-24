@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 using Moq;
 using System.Collections;
+using System.Xml.Linq;
 
 
 namespace ProjectPlanner.Classes
@@ -17,37 +18,43 @@ namespace ProjectPlanner.Classes
         public void TestAuthenticateUsername()
         {
             DataStore dataStore = new DataStore();
-            Dictionary<string, User> hashtable = new Dictionary<string, User>();
-            User newUser = new User();
-            var user = new Mock<User>(newUser);
-            hashtable.Add("test", user);
-            dataStore.SetDataBase(hashtable);
+            Hashtable hashtable = new Hashtable();
             
-            //ds.Setup(foo => foo.AddData(It.IsAny<String>(), user));
+            dataStore.SetDataBase(hashtable);
 
-            Assert.That(dataStore.AuthenticateUsername("test"), Is.EqualTo(true));
+            //check that our database is in fact empty to start
             Assert.That(dataStore.AuthenticateUsername("test2"), Is.EqualTo(false));
 
-            
+            User user = new User();
+            hashtable.Add("test", user);
+
+            //check that we can successfully see a user in the hashtable
+            Assert.That(dataStore.AuthenticateUsername("test"), Is.EqualTo(true));
+
+            //check that we cannot see users not in the hashtable
+            Assert.That(dataStore.AuthenticateUsername("test2"), Is.EqualTo(false));
+
+
         }
 
         [Test]
         public void TestAuthenticatePassword()
         {
-            DataStore dataStore = new DataStore();
-            Dictionary<string, User> hashtable = new Dictionary<string, User>();
-            User newUser = new User();
-            var user = new Mock<User>(newUser);
+            DataStore NewDataStore = new DataStore();
+            Hashtable hashtable = new Hashtable();
+            var user = new Mock<User>();
+            var dataStore = new Mock<DataStore>(NewDataStore);
 
-            user.Setup(m => m.AuthenticatePassword(It.IsAny<String>())).Returns(true);
+            dataStore.Setup(foo => foo.getUserFromDatabase(It.IsAny<String>())).Returns(user);
+            user.Setup(foo => foo.AuthenticatePassword(It.IsAny<String>())).Returns(true);
 
             hashtable.Add("test", user);
-            dataStore.SetDataBase(hashtable);
+            NewDataStore.SetDataBase(hashtable);
 
             
 
-            Assert.That(dataStore.AuthenticatePassword("test", "test"), Is.EqualTo(true));
-            Assert.That(dataStore.AuthenticatePassword("test2", "test"), Is.EqualTo(false));
+            Assert.That(NewDataStore.AuthenticatePassword("test", "test"), Is.EqualTo(true));
+            Assert.That(NewDataStore.AuthenticatePassword("test2", "test"), Is.EqualTo(false));
 
 
         }

@@ -8,23 +8,28 @@ namespace ProjectPlanner.Classes
     using System.Text;
     using System.Threading.Tasks;
 
-    class DataStore
+    public class DataStore
     {
-        private Dictionary<string, User> _dataBase;
+        private Hashtable _dataBase;
 
         public DataStore()
         {
-            _dataBase = new Dictionary<string, User>();
+            _dataBase = new Hashtable();
         }
 
-        public Dictionary<string, User> GetDataBase()
+        public Hashtable GetDataBase()
         {
             return this._dataBase;
         }
 
-        public void SetDataBase(Dictionary<string, User> value)
+        public void SetDataBase(Hashtable value)
         {
             this._dataBase = value;
+        }
+
+        public virtual dynamic getUserFromDatabase(string username)
+        {          
+            return this._dataBase[username];
         }
 
         public void AddData(string username, User account)
@@ -43,8 +48,7 @@ namespace ProjectPlanner.Classes
 
         public bool AuthenticatePassword(string username, string password)
         {
-            User userClass = this._dataBase[username];
-            return userClass.AuthenticatePassword(password);
+            return getUserFromDatabase(username).AuthenticatePassword(password);
         }
 
         public User getAuthenticatedUser(string username, string password)
