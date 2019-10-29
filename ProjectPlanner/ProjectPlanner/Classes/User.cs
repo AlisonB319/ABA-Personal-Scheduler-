@@ -81,6 +81,11 @@ namespace ProjectPlanner.Classes
             return this._firstName;
         }
 
+        public void SetPassword(string password)
+        {
+            this._password = password;
+        }
+
         public void CreateUser(string fname, string lname, string email, string password)
         {
             this._firstName = fname;

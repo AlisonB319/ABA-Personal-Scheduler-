@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using Moq;
+using NSubstitute;
 using System.Collections;
 using System.Xml.Linq;
 
@@ -45,8 +46,9 @@ namespace ProjectPlanner.Classes
             var user = new Mock<User>();
             var dataStore = new Mock<DataStore>(NewDataStore);
 
+            user.Setup(m => m.AuthenticatePassword("test")).Returns(true);
+
             dataStore.Setup(foo => foo.getUserFromDatabase(It.IsAny<String>())).Returns(user);
-            user.Setup(foo => foo.AuthenticatePassword(It.IsAny<String>())).Returns(true);
 
             hashtable.Add("test", user);
             NewDataStore.SetDataBase(hashtable);
