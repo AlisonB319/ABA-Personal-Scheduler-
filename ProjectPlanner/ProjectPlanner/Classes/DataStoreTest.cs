@@ -43,22 +43,33 @@ namespace ProjectPlanner.Classes
         {
             DataStore NewDataStore = new DataStore();
             Hashtable hashtable = new Hashtable();
-            var user = new Mock<User>();
-            var dataStore = new Mock<DataStore>(NewDataStore);
 
-            user.Setup(m => m.AuthenticatePassword("test")).Returns(true);
 
-            dataStore.Setup(foo => foo.getUserFromDatabase(It.IsAny<String>())).Returns(user);
+            /*
+             * This is how mocking should work if the mocking of concrete classes was supported by 
+             * The mocking frameworks for C#
+            */
+            //var user = new Mock<User>();
+            //var dataStore = new Mock<DataStore>(NewDataStore);
 
-            hashtable.Add("test", user);
+            //user.Setup(m => m.AuthenticatePassword("test")).Returns(true);
+            //dataStore.Setup(foo => foo.getUserFromDatabase(It.IsAny<String>())).Returns(user);
+            User NewUser = new User();
+            NewUser.CreateUser("test", "user", "thisisnotanemail@email.com", "test");
+
+
+            hashtable.Add("test", NewUser);
             NewDataStore.SetDataBase(hashtable);
 
-            
-
+            //Check that a user that is in the database connot be incorrectly authenticated
             Assert.That(NewDataStore.AuthenticatePassword("test", "test"), Is.EqualTo(true));
+            //check that a user in the database can be successfully authenticated
+            Assert.That(NewDataStore.AuthenticatePassword("test", "test"), Is.EqualTo(true));
+            //Check that a user not in the database will not be authenticated
             Assert.That(NewDataStore.AuthenticatePassword("test2", "test"), Is.EqualTo(false));
 
-
+            //In mocking we could use this to verify that the user classes AuthenticatePassword was calle dthe appropriate amount of times.
+            //user.Verify(mock => mock.AuthenticatePassword("test"), Times.Tree());
         }
 
     }

@@ -55,9 +55,10 @@ namespace ProjectPlanner.Classes
             this._projects.Add(project);
         }
 
-        private bool RemoveProject(string name)
+        public bool RemoveProject(string name)
         {
-            Project toRemove = this._projects.Find(x => x.GetName().Contains(name));
+            //.Contains was changed to .Equals in the Find(). Substring names were being caught and incorrectly removed.
+            Project toRemove = this._projects.Find(x => x.GetName().Equals(name));
             return this._projects.Remove(toRemove);
         }
 
@@ -94,7 +95,7 @@ namespace ProjectPlanner.Classes
             this._password = password;
         }
         
-        public virtual bool AuthenticatePassword(string password)
+        public bool AuthenticatePassword(string password)
         {
             if (this._password == password)
             {
@@ -195,38 +196,50 @@ namespace ProjectPlanner.Classes
                 string input = Console.ReadLine();
                 int.TryParse(input, out int op);
 
-                switch (op) {
-                    case 1:
-                        Console.WriteLine("Editing Project Name");
-                        Console.Write("New name: ");
-                        input = Console.ReadLine();
-                        project.SetName(input);
-                        break;
-                    case 2:
-                        Console.WriteLine("Editing Project Description");
-                        Console.Write("New Description: ");
-                        input = Console.ReadLine();
-                        project.SetDescription(input);
-                        break;
-                    case 3:
-                        Console.WriteLine("Editing Start Date");
-                        Console.Write("New Start Date: ");
-                        input = Console.ReadLine();
-                        DateTime.TryParse(input, out DateTime newDate);
-                        project.SetStartDate(newDate);
-                        break;
-                    case 4:
-                        Console.WriteLine("Editing End Date");
-                        Console.Write("New End Date:");
-                        input = Console.ReadLine();
-                        DateTime.TryParse(input, out newDate);
-                        project.SetEndDate(newDate);
-                        break;
-                    case 0:
-                        return;
-                };
+                //This section of code was broken out to a function to increase testability. 
+                //We can now test this new EditProject function to ensure that it is doing what we expect.
+                if (op != 0)
+                    EditProject(project, op);
+                else
+                    return;
             }
 
+        }
+
+        public void EditProject(Project project, int choice)
+        {
+            string input;
+            switch (choice)
+            {
+                case 1:
+                    Console.WriteLine("Editing Project Name");
+                    Console.Write("New name: ");
+                    input = Console.ReadLine();
+                    project.SetName(input);
+                    break;
+                case 2:
+                    Console.WriteLine("Editing Project Description");
+                    Console.Write("New Description: ");
+                    input = Console.ReadLine();
+                    project.SetDescription(input);
+                    break;
+                case 3:
+                    Console.WriteLine("Editing Start Date");
+                    Console.Write("New Start Date: ");
+                    input = Console.ReadLine();
+                    DateTime.TryParse(input, out DateTime newDate);
+                    project.SetStartDate(newDate);
+                    break;
+                case 4:
+                    Console.WriteLine("Editing End Date");
+                    Console.Write("New End Date:");
+                    input = Console.ReadLine();
+                    DateTime.TryParse(input, out newDate);
+                    project.SetEndDate(newDate);
+                    break;
+                default:
+                    return;
+            };
         }
     }
 }

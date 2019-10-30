@@ -27,9 +27,9 @@ namespace ProjectPlanner.Classes
             this._dataBase = value;
         }
 
-        public virtual dynamic getUserFromDatabase(string username)
+        public User getUserFromDatabase(string username)
         {          
-            return this._dataBase[username];
+            return (User)this._dataBase[username];
         }
 
         public void AddData(string username, User account)
@@ -48,10 +48,18 @@ namespace ProjectPlanner.Classes
 
         public bool AuthenticatePassword(string username, string password)
         {
-            return getUserFromDatabase(username).AuthenticatePassword(password);
+            //test was not passing due to a lack of null check from the getUserFromDatabase return value
+            bool result = false;
+            User user;
+            if((user = getUserFromDatabase(username)) == null)
+            {
+                return result;
+            }
+            else
+                return user.AuthenticatePassword(password);
         }
 
-        public User getAuthenticatedUser(string username, string password)
+        public User GetAuthenticatedUser(string username, string password)
         {
             return (User)this._dataBase[username];
         }
