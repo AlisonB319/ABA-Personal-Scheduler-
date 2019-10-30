@@ -51,9 +51,10 @@
             return this.startDate;
         }
 
-        public void SetStartDate(DateTime value)
+        public void SetStartDate(string value)
         {
-            this.startDate = value;
+            DateTime startDate = Convert.ToDateTime(value);
+            this.startDate = startDate;
         }
         
         public DateTime GetEndDate()
@@ -61,9 +62,10 @@
             return this.endDate;
         }
 
-        public void SetEndDate(DateTime value)
+        public void SetEndDate(string value)
         {
-            this.endDate = value;
+            DateTime endDate = Convert.ToDateTime(value);
+            this.endDate = endDate;
         }
         
         public float GetHoursNeeded()
@@ -71,9 +73,10 @@
             return this.hoursNeeded;
         }
 
-        public void SetHoursNeeded(float value)
+        public void SetHoursNeeded(string value)
         {
-            this.hoursNeeded = value;
+            float fHoursNeeded = float.Parse(value, CultureInfo.InvariantCulture.NumberFormat);
+            this.hoursNeeded = fHoursNeeded;
         }
         
         public float GetHoursWorked()
@@ -81,19 +84,15 @@
             return this.hoursWorked;
         }
 
-        public void SetHoursWorked(float value)
+        public void SetHoursWorked(string value)
         {
-            this.hoursWorked = value;
+            float fHoursWorked = float.Parse(value, CultureInfo.InvariantCulture.NumberFormat);
+            this.hoursWorked = fHoursWorked;
         }
         
         public float GetPercentComplete()
         {
             return this.percentComplete;
-        }
-
-        public void SetPercentComplete(float value)
-        {
-            this.percentComplete = value;
         }
 
         public float GetTotalHours()
@@ -107,13 +106,16 @@
 
         public void UpdateTotalHours()
         {
-            this.SetTotalHours(this.GetHoursNeeded() + this.GetHoursWorked());
+            float num = this.GetHoursNeeded() + this.GetHoursWorked();
+            this.SetTotalHours(num);
         }
 
         public void UpdatePercentComplete()
         {
-            this.SetPercentComplete(this.GetHoursWorked() / this.GetTotalHours());
+            this.percentComplete = this.GetHoursWorked() / this.GetTotalHours();
         }
+
+
         public void CreateSchedule()
         {
             string name, client, start, end, hoursNeeded, hoursWorked, description;
@@ -128,25 +130,25 @@
 
             Console.WriteLine("Please enter the start date of the schedule MM-DD-YYYY");
             start = Console.ReadLine();
-            DateTime startDate = Convert.ToDateTime(start);
-            this.SetStartDate(startDate);
+            this.SetStartDate(start);
 
             Console.WriteLine("Please enter the end date of the schedule MM-DD-YYYY");
             end = Console.ReadLine();
-            DateTime endDate = Convert.ToDateTime(end);
-            this.SetEndDate(endDate);
+            this.SetEndDate(end);
 
             Console.WriteLine("Please enter hours needed, partial hours are excepted ex: 4.3");
             hoursNeeded = Console.ReadLine();
-            float fHoursNeeded = float.Parse(hoursNeeded, CultureInfo.InvariantCulture.NumberFormat);
-            this.SetHoursNeeded(fHoursNeeded);
+            this.SetHoursNeeded(hoursNeeded);
 
             Console.WriteLine("Please enter hours worked, partial hours are excepted ex: 4.3");
             hoursWorked = Console.ReadLine();
-            float fHoursWorked = float.Parse(hoursWorked, CultureInfo.InvariantCulture.NumberFormat);
-            this.SetHoursWorked(fHoursWorked);
-            this.SetTotalHours(fHoursNeeded + fHoursNeeded);
-            this.SetPercentComplete(fHoursWorked / this.GetTotalHours());
+            
+            this.SetHoursWorked(hoursWorked);
+
+            float num = this.GetHoursNeeded() + this.GetHoursNeeded();
+            this.SetTotalHours(num);
+
+            this.UpdatePercentComplete();
 
             Console.WriteLine("Please enter the description of the schedule");
             description = Console.ReadLine();
