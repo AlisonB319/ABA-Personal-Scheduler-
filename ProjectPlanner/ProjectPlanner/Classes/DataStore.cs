@@ -8,13 +8,13 @@ namespace ProjectPlanner.Classes
     using System.Text;
     using System.Threading.Tasks;
 
-    class DataStore
+    public class DataStore
     {
         private Hashtable _dataBase;
 
         public DataStore()
         {
-            this.SetDataBase(new Hashtable());
+            _dataBase = new Hashtable();
         }
 
         public Hashtable GetDataBase()
@@ -25,6 +25,11 @@ namespace ProjectPlanner.Classes
         public void SetDataBase(Hashtable value)
         {
             this._dataBase = value;
+        }
+
+        public User getUserFromDatabase(string username)
+        {          
+            return (User)this._dataBase[username];
         }
 
         public void AddData(string username, User account)
@@ -43,13 +48,22 @@ namespace ProjectPlanner.Classes
 
         public bool AuthenticatePassword(string username, string password)
         {
-            User userClass = (User)this._dataBase[username];
-            return userClass.AuthenticatePassword(password);
+            //test was not passing due to a lack of null check from the getUserFromDatabase return value
+            bool result = false;
+            User user;
+            if((user = getUserFromDatabase(username)) == null)
+            {
+                return result;
+            }
+            else
+                return user.AuthenticatePassword(password);
         }
 
-        public User getAuthenticatedUser(string username, string password)
+        public User GetAuthenticatedUser(string username, string password)
         {
             return (User)this._dataBase[username];
         }
+
+
     }
 }

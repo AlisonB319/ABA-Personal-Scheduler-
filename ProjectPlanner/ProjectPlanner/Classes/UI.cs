@@ -60,7 +60,7 @@ namespace ProjectPlanner.Classes
                     if (this._dataStore.AuthenticatePassword(username, password))
                     {
                         Console.WriteLine("User is authenticated");
-                        this._authenticatedUser = this._dataStore.getAuthenticatedUser(username, password);
+                        this._authenticatedUser = this._dataStore.GetAuthenticatedUser(username, password);
                         loginComplete = true;
                     }
                     else
