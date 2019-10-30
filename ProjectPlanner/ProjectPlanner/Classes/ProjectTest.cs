@@ -26,10 +26,14 @@ namespace ProjectPlanner.Classes
             Schedule schedule = new Schedule();
             schedule.SetName("schedulename");
             project.AddSchedule(schedule);
+
+            // checks to see if the schedule was actually added to the project
             Assert.That(project.GetSchedules()[0].GetName(), Is.EqualTo("schedulename"));
             Assert.That(project.GetSchedules()[0], Is.EqualTo(schedule));
         }
-
+        
+        // This tests adding multiple schedules to a project, and makes sure that they
+        // are in the correct order
         [Test]
         public void TestAddMulipleSchedules()
         {
@@ -52,6 +56,7 @@ namespace ProjectPlanner.Classes
             Assert.AreEqual(project.GetSchedules()[2], s3);
         }
 
+        // This tests checks to see if we can remove a schedule successfully from a project
         [Test]
         public void TestRemoveSchedule()
         {
@@ -68,11 +73,13 @@ namespace ProjectPlanner.Classes
             Assert.AreEqual(project.GetSchedules().Count, 0);
         }
 
+        
         [Test]
         public void TestRemoveSchedulePosition()
         {
             // Test that, if we have three schedules and we move the one at index 1,
             // that the object at index 2 will move to index 1 after the removal
+            // Makes sure the schedules keep their order
             Project p = new Project();
             Schedule s1 = new Schedule();
             Schedule s2 = new Schedule();
@@ -104,7 +111,9 @@ namespace ProjectPlanner.Classes
             Assert.AreEqual(p.GetSchedules(), after);
 
         }
-
+    
+        // since there are two ways to remove schedules, by name and by project,
+        // this tests that we can remove schedules by their names
         [Test]
         public void TestRemoveScheduleByName()
         {
