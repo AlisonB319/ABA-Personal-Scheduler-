@@ -13,23 +13,36 @@ namespace ProjectPlanner.Classes
     [TestFixture]
     class ProjectTest
     {
+
+        Project p;
+
+        [SetUp]
+        public void SetUp()
+        {
+            p = new Project();
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            p = null;
+        }
         [Test]
         public void TestAddSchedule() {
-            Project project = new Project();
             // Would do mocking here, although none of the mocking frameworks in C# allow you to mock concrete classes, only interfaces
             // Below is what I tried to do, but the Moq framework doesn't allow it
             /* var mocked = new Mock<Schedule>();
             mocked.Setup(schedule => schedule.GetName()).Returns("scheduleName");
-            project.AddSchedule(mocked.Object);
-            Assert.That(project.GetSchedules()[0].GetName(), Is.EqualTo("scheduleName"));
+            p.AddSchedule(mocked.Object);
+            Assert.That(p.GetSchedules()[0].GetName(), Is.EqualTo("scheduleName"));
             */
             Schedule schedule = new Schedule();
             schedule.SetName("schedulename");
-            project.AddSchedule(schedule);
+            p.AddSchedule(schedule);
 
             // checks to see if the schedule was actually added to the project
-            Assert.That(project.GetSchedules()[0].GetName(), Is.EqualTo("schedulename"));
-            Assert.That(project.GetSchedules()[0], Is.EqualTo(schedule));
+            Assert.That(p.GetSchedules()[0].GetName(), Is.EqualTo("schedulename"));
+            Assert.That(p.GetSchedules()[0], Is.EqualTo(schedule));
         }
         
         // This tests adding multiple schedules to a project, and makes sure that they
@@ -37,7 +50,6 @@ namespace ProjectPlanner.Classes
         [Test]
         public void TestAddMulipleSchedules()
         {
-            Project project = new Project();
             // Again, would do mocking here for multiple schedules, but we can't C# and concrete classes
             Schedule s1 = new Schedule();
             Schedule s2 = new Schedule();
@@ -47,13 +59,13 @@ namespace ProjectPlanner.Classes
             s2.SetClient("Alfredo Diaz");
             s3.SetClient("Fiona Nova");
 
-            project.AddSchedule(s1);
-            project.AddSchedule(s2);
-            project.AddSchedule(s3);
+            p.AddSchedule(s1);
+            p.AddSchedule(s2);
+            p.AddSchedule(s3);
 
-            Assert.AreEqual(project.GetSchedules()[0], s1);
-            Assert.AreEqual(project.GetSchedules()[1], s2);
-            Assert.AreEqual(project.GetSchedules()[2], s3);
+            Assert.AreEqual(p.GetSchedules()[0], s1);
+            Assert.AreEqual(p.GetSchedules()[1], s2);
+            Assert.AreEqual(p.GetSchedules()[2], s3);
         }
 
         // This tests checks to see if we can remove a schedule successfully from a project
@@ -61,16 +73,15 @@ namespace ProjectPlanner.Classes
         public void TestRemoveSchedule()
         {
             // Testing that we can remove a schedule from a project
-            Project project = new Project();
             Schedule s = new Schedule();
 
             s.SetClient("Fiona Nova");
 
-            project.AddSchedule(s);
-            Assert.AreEqual(project.GetSchedules().Count, 1);
+            p.AddSchedule(s);
+            Assert.AreEqual(p.GetSchedules().Count, 1);
 
-            project.RemoveSchedule(s);
-            Assert.AreEqual(project.GetSchedules().Count, 0);
+            p.RemoveSchedule(s);
+            Assert.AreEqual(p.GetSchedules().Count, 0);
         }
 
         
@@ -80,7 +91,6 @@ namespace ProjectPlanner.Classes
             // Test that, if we have three schedules and we move the one at index 1,
             // that the object at index 2 will move to index 1 after the removal
             // Makes sure the schedules keep their order
-            Project p = new Project();
             Schedule s1 = new Schedule();
             Schedule s2 = new Schedule();
             Schedule s3 = new Schedule();
@@ -117,7 +127,6 @@ namespace ProjectPlanner.Classes
         [Test]
         public void TestRemoveScheduleByName()
         {
-            Project p = new Project();
             // would use mocking here as well
             Schedule s = new Schedule();
             s.SetName("newname");
