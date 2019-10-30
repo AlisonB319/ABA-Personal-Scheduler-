@@ -105,5 +105,22 @@ namespace ProjectPlanner.Classes
 
         }
 
+        [Test]
+        public void TestRemoveScheduleByName()
+        {
+            Project p = new Project();
+            // would use mocking here as well
+            Schedule s = new Schedule();
+            s.SetName("newname");
+
+            p.AddSchedule(s);
+
+            Assert.AreEqual(p.GetSchedules().Count, 1);
+
+            p.RemoveSchedule("newname");
+            Assert.AreEqual(p.GetSchedules().Count, 0);
+
+        }
+
     }
 }

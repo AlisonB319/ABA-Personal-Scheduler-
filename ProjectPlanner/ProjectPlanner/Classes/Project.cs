@@ -44,7 +44,7 @@
         // name and removes it
         public bool RemoveSchedule(String val)
         {
-            Schedule toRemove = this.schedules.Find(x => x.GetName().Contains(this.name));
+            Schedule toRemove = this.schedules.Find(x => x.GetName().Contains(val));
             return this.schedules.Remove(toRemove);
         }
 
