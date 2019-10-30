@@ -140,5 +140,30 @@ namespace ProjectPlanner.Classes
 
         }
 
+        [Test]
+        public void TestRemoveNonexistantSchedule()
+        {
+            // would use mocking here
+            Schedule s1 = new Schedule();
+            Schedule s2 = new Schedule();
+            Schedule s3 = new Schedule();
+
+            s1.SetName("first schedule");
+            s2.SetName("second schedule");
+            s3.SetName("third schedule");
+
+            p.AddSchedule(s1);
+
+
+            // testing removing schedule that isn't in project doesn't crash, and that it returns false
+            // this tests using a schedule as an argument
+            Assert.DoesNotThrow(() => p.RemoveSchedule(s2));
+            Assert.IsFalse(p.RemoveSchedule(s2));
+
+            // these assertions do the same thing as above except tests the overloaded function using a schedule name as an argument
+            Assert.DoesNotThrow(() => p.RemoveSchedule(s3.GetName()));
+            Assert.IsFalse(p.RemoveSchedule(s3.GetName()));
+        }
+
     }
 }
