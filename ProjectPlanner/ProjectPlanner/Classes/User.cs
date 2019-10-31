@@ -112,8 +112,8 @@ namespace ProjectPlanner.Classes
                 projectCount++;
                 Console.WriteLine("\nProject {0}: {1}", projectCount, project.GetName());
                 Console.WriteLine("\tDescription: {0}", project.GetDescription());
-                Console.WriteLine("\tStart Date: {0}", project.GetStartDate().Date);
-                Console.WriteLine("\tEnd Date: {0}", project.GetEndDate().Date);
+                Console.WriteLine("\tStart Date: {0}", project.GetStartDate().ToShortDateString());
+                Console.WriteLine("\tEnd Date: {0}", project.GetEndDate().ToShortDateString());
 
                 Console.WriteLine("\tNumber of schedules: {0}", project.GetSchedules().Count());
                 Console.Write("\n");
