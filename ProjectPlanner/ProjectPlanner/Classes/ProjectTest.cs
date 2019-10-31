@@ -165,5 +165,31 @@ namespace ProjectPlanner.Classes
             Assert.IsFalse(p.RemoveSchedule(s3.GetName()));
         }
 
+        //[Test]
+        //public void TestEndDateBeforeStart()
+        //{
+        //    // tests that, when setting the end date, it can't be before the start date.
+        //    // WARNING must uncomment thrown exception in code for this to run
+        //    DateTime.TryParse("10-10-2000", out DateTime start);
+        //    p.SetStartDate(start);
+        //    DateTime.TryParse("09-10-2000", out DateTime end);
+        //    var ex = Assert.Throws<System.ArgumentException>(() => p.SetEndDate(end));
+        //    Assert.AreEqual(ex.Message, "end date cannot be before start date");
+
+        //}
+
+        //[Test]
+        //public void TestEndAfterStart()
+        //{
+        //    // tests that and end date can be set when it's after the start date
+        //    // WARNING must uncomment thrown exception in code for this to run
+
+        //    DateTime.TryParse("10-10-1000", out DateTime start);
+        //    p.SetStartDate(start);
+        //    DateTime.TryParse("10-10-2000", out DateTime end);
+
+        //    Assert.DoesNotThrow(() => p.SetEndDate(end));
+        //}
+
     }
 }
