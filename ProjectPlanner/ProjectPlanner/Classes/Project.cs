@@ -62,7 +62,24 @@
 
         public void SetEndDate(DateTime value)
         {
-            this.endDate = value;
+            bool valid = false;
+            while (valid == false)
+            {
+                if (this.GetStartDate() <= value)
+                {
+                    this.endDate = value;
+                    valid = true;
+                }
+                else
+                {
+                    throw new System.ArgumentException("end date cannot be before start date");
+                    Console.WriteLine("Invalid End Date.");
+                    Console.WriteLine("A project's end date cannot take place before it's start date");
+                    Console.WriteLine("This projects start date is {0}. Enter another end date", this.GetStartDate().ToShortDateString());
+                    string end = Console.ReadLine();
+                    DateTime.TryParse(end, out value);
+                }
+            }
         }
 
         public DateTime GetStartDate()
@@ -126,8 +143,8 @@
                 scheduleCount++;
                 Console.WriteLine("\nSchedule {0}: {1}", scheduleCount, schedule.GetName());
                 Console.WriteLine("Description: {0}", schedule.GetDescription());
-                Console.WriteLine("\tStart Date: {0}", schedule.GetStartDate().Date);
-                Console.WriteLine("\tEnd Date: {0}", schedule.GetEndDate().Date);
+                Console.WriteLine("\tStart Date: {0}", schedule.GetStartDate().ToShortDateString());
+                Console.WriteLine("\tEnd Date: {0}", schedule.GetEndDate().Date.ToShortDateString());
                 Console.WriteLine("\tHours Needed: {0}", schedule.GetHoursNeeded());
                 Console.WriteLine("\tHours Worked: {0}", schedule.GetHoursWorked());
                 Console.WriteLine("\tPercentComplete: {0}", schedule.GetPercentComplete());
