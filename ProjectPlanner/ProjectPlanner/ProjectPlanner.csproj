@@ -83,6 +83,7 @@
     <Compile Include="Classes\Project.cs" />
     <Compile Include="Classes\ProjectTest.cs" />
     <Compile Include="Classes\Schedule.cs" />
+    <Compile Include="Classes\ScheduleTest.cs" />
     <Compile Include="Classes\UI.cs" />
     <Compile Include="Classes\User.cs" />
     <Compile Include="Classes\UserTest.cs" />
