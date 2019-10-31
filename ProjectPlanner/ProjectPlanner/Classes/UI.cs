@@ -135,7 +135,7 @@ namespace ProjectPlanner.Classes
                             Project project = _authenticatedUser.GetListProjects()[op];
 
                             Schedule newSchedule = new Schedule();
-                            newSchedule.CreateSchedule();
+                            newSchedule.CreateSchedule(project);
                             project.AddSchedule(newSchedule);
                         }
 

@@ -36,6 +36,7 @@
         }
         public void AddSchedule(Schedule val)
         {
+            val.SetProject(this);
             this.schedules.Add(val);
         }
 
@@ -110,7 +111,7 @@
 
             Console.WriteLine("Please enter the end date of the project MM-DD-YYYY");
             end = Console.ReadLine();
-            DateTime.TryParse(end, out DateTime endTime);
+            DateTime.TryParse(end, out DateTime endDate);
             this.SetEndDate(endDate);
 
             Console.WriteLine("Please enter the description of the project");
@@ -148,7 +149,7 @@
                     string key = Console.ReadLine();
                     if (key == "c") {
                         Schedule newSchedule = new Schedule();
-                        newSchedule.CreateSchedule();
+                        newSchedule.CreateSchedule(this);
                         this.AddSchedule(newSchedule);
                     }
                     return;
@@ -223,8 +224,7 @@
                                         Console.WriteLine("Current Start Date: {0}", schedule.GetStartDate().Date);
                                         Console.Write("New Start Date (MM-DD-YYYY): ");
                                         string input = Console.ReadLine();
-                                        DateTime.TryParse(input, out DateTime newDate);
-                                        schedule.SetStartDate(newDate);
+                                        schedule.SetStartDate(input);
                                         Console.WriteLine("Done.");
                                         break;
                                     case 4:
@@ -232,8 +232,7 @@
                                         Console.WriteLine("Current End Date: {0}", schedule.GetEndDate().Date);
                                         Console.Write("New End Date (MM-DD-YYYY): ");
                                         input = Console.ReadLine();
-                                        DateTime.TryParse(input, out newDate);
-                                        schedule.SetEndDate(newDate);
+                                        schedule.SetEndDate(input);
                                         Console.WriteLine("Done.");
                                         break;
                                     case 5:
@@ -241,8 +240,7 @@
                                         Console.WriteLine("Current Hours Needed: {0}", schedule.GetHoursNeeded());
                                         Console.Write("New Hours Needed: ");
                                         input = Console.ReadLine();
-                                        float.TryParse(input, out float newHours);
-                                        schedule.SetHoursNeeded(newHours);
+                                        schedule.SetHoursNeeded(input);
 
                                         // updating total hours and percent complete too
                                         schedule.UpdateTotalHours();
