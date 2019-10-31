@@ -73,7 +73,7 @@
                 }
                 else
                 {
-                    throw new System.ArgumentException("end date cannot be before start date");
+                    // throw new System.ArgumentException("end date cannot be before start date");
                     Console.WriteLine("Invalid End Date.");
                     Console.WriteLine("A project's end date cannot take place before it's start date");
                     Console.WriteLine("This projects start date is {0}. Enter another end date", this.GetStartDate().ToShortDateString());
