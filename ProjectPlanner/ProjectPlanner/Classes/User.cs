@@ -7,7 +7,7 @@ namespace ProjectPlanner.Classes
     using System.Threading.Tasks;
 
 
-    public class User
+    public class User:IUser
     {
         private string _firstName, _lastName, _email, _password;
 

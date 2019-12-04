@@ -6,7 +6,7 @@
     using System.Text;
     using System.Threading.Tasks;
 
-    public class Project
+    public class Project:IProject
     {
         private string name, description;
         private DateTime startDate, endDate;
