@@ -7,7 +7,7 @@ namespace ProjectPlanner.Classes
     using System.Threading.Tasks;
 
 
-    public class User:IUser
+    public class User: IUser
     {
         private string _firstName, _lastName, _email, _password;
 
@@ -58,8 +58,15 @@ namespace ProjectPlanner.Classes
         public bool RemoveProject(string name)
         {
             //.Contains was changed to .Equals in the Find(). Substring names were being caught and incorrectly removed.
-            Project toRemove = this._projects.Find(x => x.GetName().Equals(name));
-            return this._projects.Remove(toRemove);
+            try
+            {
+                Project toRemove = this._projects.Find(x => x.GetName().Equals(name));
+                return this._projects.Remove(toRemove);
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         private bool RemoveProject(Project project)
@@ -124,7 +131,7 @@ namespace ProjectPlanner.Classes
 
         public void OpenProjects()
         {
-            
+            var cons = new ConsoleWrapper();
             if (this.GetListProjects().Count() == 0)
             {
                 Console.WriteLine("Whoops! You don't have any projects! Please create a project first.");
@@ -183,6 +190,7 @@ namespace ProjectPlanner.Classes
 
             while (running)
             {
+                var cons = new ConsoleWrapper();
 
                 Console.Clear();
 
@@ -199,14 +207,14 @@ namespace ProjectPlanner.Classes
                 //This section of code was broken out to a function to increase testability. 
                 //We can now test this new EditProject function to ensure that it is doing what we expect.
                 if (op != 0)
-                    EditProject(project, op);
+                    EditProject(project, op, cons);
                 else
                     return;
             }
 
         }
 
-        public void EditProject(Project project, int choice)
+        public void EditProject(Project project, int choice, IConsole Console)
         {
             string input;
             switch (choice)

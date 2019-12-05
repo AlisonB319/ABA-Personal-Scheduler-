@@ -77,9 +77,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Console.cs" />
     <Compile Include="Classes\DataStore.cs" />
     <Compile Include="Classes\DataStoreTest.cs" />
     <Compile Include="Classes\Email.cs" />
+    <Compile Include="Classes\IConsole.cs" />
     <Compile Include="Classes\IDataStore.cs" />
     <Compile Include="Classes\IProject.cs" />
     <Compile Include="Classes\ISchedule.cs" />
