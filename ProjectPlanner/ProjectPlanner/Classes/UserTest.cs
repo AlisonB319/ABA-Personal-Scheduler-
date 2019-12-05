@@ -83,6 +83,10 @@ namespace ProjectPlanner.Classes
         public void TestEditProject()
         {
             // Mocking the Project object
+            /*
+             * This mocks the process of creating a project and then mocking the 
+             * the entire project once
+             */
             var project = new Mock<Project>();
             var cons = new Mock<IConsole>();
 
@@ -102,6 +106,11 @@ namespace ProjectPlanner.Classes
             project.Verify(mock => mock.SetDescription(It.IsAny<string>()), Times.Once());
             project.Verify(mock => mock.SetStartDate(It.IsAny<DateTime>()), Times.Once());
             project.Verify(mock => mock.SetEndDate(It.IsAny<DateTime>()), Times.Once());
+
+            TestUser.EditProject(project.Object, 1, cons.Object);
+            TestUser.EditProject(project.Object, 2, cons.Object);
+            TestUser.EditProject(project.Object, 3, cons.Object);
+            TestUser.EditProject(project.Object, 4, cons.Object);
         }
     }
 }
