@@ -12,6 +12,8 @@ namespace IntegrationTests.Classes
             TestLogIn1();
             TestLogIn2();
             TestLogIn3();
+            TestLogIn4();
+            TestLogIn5();
         }
 
 
@@ -118,6 +120,95 @@ namespace IntegrationTests.Classes
             else
             {
                 Console.WriteLine("Login3: Failed, Authentication failed");
+
+            }
+        }
+
+        //integrating _datastore.AuthenticatePassword given the user is new
+        public void TestLogIn4()
+        {
+            //The user would provide information for their account here
+            User user = new User(); //constructor is trivial so we skip an integration step
+            IDataStore dataStore = new DataStore();
+            User _authenticatedUser;
+
+            var mDataStore = new Mock<DataStore>();
+
+            string FirstName = "FirstName";
+            string LastName = "LastName";
+            string Email = "Email@email.com";
+            string Password = "Password";
+
+            
+            mDataStore.Setup(m => m.GetAuthenticatedUser(Email, Password)).Returns(user);
+
+
+
+            user.CreateUser(FirstName, LastName, Email, Password);
+            dataStore.AddData(Email, user);
+
+
+            if (dataStore.AuthenticateUsername(Email))
+            {
+                if (dataStore.AuthenticatePassword(Email, Password))
+                {
+                    _authenticatedUser = mDataStore.Object.GetAuthenticatedUser(Email, Password);
+                    Console.WriteLine("Login4: Passed");
+                }
+                else
+                {
+                    Console.WriteLine("Login4: Failed, Authentication failed");
+
+                }
+            }
+            else
+            {
+                Console.WriteLine("Login4: Failed, Authentication failed");
+
+            }
+        }
+
+        //integrating _datastore.GetAuthenticatedUser given the user is new
+        public void TestLogIn5()
+        {
+            //The user would provide information for their account here
+            User user = new User(); //constructor is trivial so we skip an integration step
+            IDataStore dataStore = new DataStore();
+            User _authenticatedUser;
+
+
+            string FirstName = "FirstName";
+            string LastName = "LastName";
+            string Email = "Email@email.com";
+            string Password = "Password";
+
+            user.CreateUser(FirstName, LastName, Email, Password);
+            dataStore.AddData(Email, user);
+
+
+            if (dataStore.AuthenticateUsername(Email))
+            {
+                if (dataStore.AuthenticatePassword(Email, Password))
+                {
+                    _authenticatedUser = dataStore.GetAuthenticatedUser(Email, Password);
+                    if (_authenticatedUser == user)
+                    {
+                        Console.WriteLine("Login5: Passed");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Login5: Failed, Wrong user returned");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Login5: Failed, Authentication failed");
+
+                }
+            }
+            else
+            {
+                Console.WriteLine("Login5: Failed, Authentication failed");
 
             }
         }
