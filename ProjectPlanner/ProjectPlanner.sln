@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.421
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29411.108
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectPlanner", "ProjectPlanner\ProjectPlanner.csproj", "{B1D16B72-51AC-4E82-9646-2197C63ACD9F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrationTests", "IntegrationTests\IntegrationTests.csproj", "{F612CDB8-7755-4E36-AAD3-BCBE82DCA3DE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{B1D16B72-51AC-4E82-9646-2197C63ACD9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1D16B72-51AC-4E82-9646-2197C63ACD9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B1D16B72-51AC-4E82-9646-2197C63ACD9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F612CDB8-7755-4E36-AAD3-BCBE82DCA3DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F612CDB8-7755-4E36-AAD3-BCBE82DCA3DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F612CDB8-7755-4E36-AAD3-BCBE82DCA3DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F612CDB8-7755-4E36-AAD3-BCBE82DCA3DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

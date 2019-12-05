@@ -1,4 +1,4 @@
-﻿namespace ProjectPlanner.Classes
+﻿namespace IntegrationTests.Classes
 {
     using System;
     using System.Collections.Generic;
@@ -54,7 +54,7 @@
         {
             this.description = value;
         }
-
+        
         public DateTime GetStartDate()
         {
             return this.startDate;
@@ -65,7 +65,7 @@
             DateTime.TryParse(value, out DateTime startDate);
             this.startDate = startDate;
         }
-
+        
         public DateTime GetEndDate()
         {
             return this.endDate;
@@ -74,9 +74,9 @@
         public void SetEndDate(string value)
         {
             DateTime.TryParse(value, out DateTime endDate);
-            this.endDate = endDate;
+            this.startDate = endDate;
         }
-
+        
         public float GetHoursNeeded()
         {
             return this.hoursNeeded;
@@ -87,7 +87,7 @@
             float fHoursNeeded = float.Parse(value, CultureInfo.InvariantCulture.NumberFormat);
             this.hoursNeeded = fHoursNeeded;
         }
-
+        
         public float GetHoursWorked()
         {
             return this.hoursWorked;
@@ -98,7 +98,7 @@
             float fHoursWorked = float.Parse(value, CultureInfo.InvariantCulture.NumberFormat);
             this.hoursWorked = fHoursWorked;
         }
-
+        
         public float GetPercentComplete()
         {
             return this.percentComplete;
@@ -142,6 +142,7 @@
             }
             return true;
         }
+
 
         public void CreateSchedule(Project proj)
         {
@@ -205,8 +206,7 @@
                     DateTime projEnd = proj.GetEndDate();
                     string endStr, str;
                     str = "";
-                    if (resultP == false)
-                    {
+                    if (resultP == false) {
                         endStr = projEnd.ToString();
                         str = "Please enter a date after " + endStr;
                     }
@@ -225,7 +225,7 @@
 
             Console.WriteLine("Please enter hours worked, partial hours are excepted ex: 4.3");
             hoursWorked = Console.ReadLine();
-
+            
             this.SetHoursWorked(hoursWorked);
 
             float num = this.GetHoursNeeded() + this.GetHoursNeeded();
