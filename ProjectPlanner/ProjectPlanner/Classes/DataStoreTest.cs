@@ -18,8 +18,6 @@ namespace ProjectPlanner.Classes
         [Test]
         public void TestAuthenticateUsername()
         {
-            Hashtable hashtable = new Hashtable();
-
             // mock the user object to simulate what would in the actual code
             var user = new Mock<User>();
             var dataStore = new DataStore();
@@ -34,8 +32,6 @@ namespace ProjectPlanner.Classes
         [Test]
         public void TestAuthenticatePassword()
         {
-            Hashtable hashtable = new Hashtable();
-
             var user = new Mock<User>();
             var dataStore = new DataStore();
 
