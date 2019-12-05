@@ -18,7 +18,7 @@ namespace ProjectPlanner.Classes
             _projects = new List<Project>();
         }
 
-        private string Getemail()
+        public virtual string Getemail()
         {
             return this._email;
         }
@@ -95,7 +95,7 @@ namespace ProjectPlanner.Classes
             this._password = password;
         }
         
-        public bool AuthenticatePassword(string password)
+        public virtual bool AuthenticatePassword(string password)
         {
             if (this._password == password)
             {
