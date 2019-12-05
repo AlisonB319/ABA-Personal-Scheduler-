@@ -28,7 +28,6 @@ namespace ProjectPlanner.Classes
         [Test]
         public void TestAuthenticatePassword()
         {
-
             //check against an unset password
             Assert.That(TestUser.AuthenticatePassword("test"), Is.EqualTo(false));
 
@@ -36,107 +35,73 @@ namespace ProjectPlanner.Classes
 
             //check against a set password but wrongly
             Assert.That(TestUser.AuthenticatePassword("test2"), Is.EqualTo(false));
-
             //check with an empty string
             Assert.That(TestUser.AuthenticatePassword(""), Is.EqualTo(false));
-
             //check with correct password
             Assert.That(TestUser.AuthenticatePassword("test"), Is.EqualTo(true));
-
-
-
-
         }
 
         [Test]
         public void TestRemoveProject()
         {
-            //Ideally the project class would be mocked so that its implementations do not affect our test
-            Project NewProject = new Project();
             string name = "test";
             string name2 = "test2";
-            //example of mocking implementation
-            //var project = new Mock<NewProject>();
-            //project.Setup(m => m.GetName()).Returns(<A concrete string or matchers>);
-
-            NewProject.SetName(name2);
+            
+            // mock the project class so that we don't have to worry about implementation 
+            var proj = new Mock<Project>();
+            proj.Setup(p => p.GetName()).Returns(name2);
 
             //Check that an empty project list acts appropriately
             Assert.That(TestUser.RemoveProject(name), Is.EqualTo(false));
-
-            TestUser.AddProject(NewProject);
-
+            TestUser.AddProject(proj.Object);
             //Check that and improper remove call will not remove the wrong item
             Assert.That(TestUser.RemoveProject(name), Is.EqualTo(false));
-
             //check that we can remove the item that we added to the datastore
             Assert.That(TestUser.RemoveProject(name2), Is.EqualTo(true));
-
         }
 
         [Test]
         public void TestGetProject()
         {
-            //Ideally the project class would be mocked so that its implementations do not affect our test
-            Project NewProject = new Project();
             string name = "test";
             string name2 = "test2";
-            //example of mocking implementation
-            //var project = new Mock<NewProject>();
-            //project.Setup(m => m.GetName()).Returns(Project);
 
-            NewProject.SetName(name2);
+            // Mocking the Project object
+            var proj = new Mock<Project>();
+            proj.Setup(p => p.GetName()).Returns(name2);
 
             //Check that an empty project list acts appropriately
             Assert.That(TestUser.GetProject(name), Is.EqualTo(null));
-
-            TestUser.AddProject(NewProject);
-
+            TestUser.AddProject(proj.Object);
             //Check that and improper remove call will not remove the wrong item
             Assert.That(TestUser.GetProject(name), Is.EqualTo(null));
-
             //check that we can remove the item that we added to the datastore
-            Assert.That(TestUser.GetProject(name2), Is.EqualTo(NewProject));
+            Assert.That(TestUser.GetProject(name2), Is.EqualTo(proj.Object));
         }
 
         [Test]
         public void TestEditProject()
         {
-            /*
-             * This test can only be run with the ability to properly mock objects.
-             * Edit project is a switch statement so we want to make sure that we can successfully
-             * touch all code  paths in the switch statement and execute all of the respective functions 
-             * in the switch statements
-             * 
-             * To do this we can mock the project that is input to the user and keep track of the calls
-             * on each of the set functions that are used in the edit function. All of these functions
-             * are mocked so that they do not do anything other than receive a function call.
-             * 
-             * 
-             * 
-            Project NewProject = new Project();
-            string name = "test";
-            string name2 = "test2";
+            // Mocking the Project object
+            var project = new Mock<Project>();
+            var cons = new Mock<IConsole>();
 
-            var project = new Mock<Project>(NewProject);
+            cons.Setup(c => c.WriteLine((It.IsAny<string>())));
 
-            project.Setup(mock => mock.SetName());
-            project.Setup(mock => mock.SetDescription());
-            project.Setup(mock => mock.SetStartDate());
-            project.Setup(mock => mock.SetEndDate());
+            project.Setup(pro => pro.SetName(It.IsAny<string>())); 
+            project.Setup(pro => pro.SetDescription(It.IsAny<string>()));
+            project.Setup(pro => pro.SetStartDate(It.IsAny<DateTime>()));
+            project.Setup(pro => pro.SetEndDate(It.IsAny<DateTime>()));
 
-            TestUser.EditProject(project, 1);
-            TestUser.EditProject(project, 2);
-            TestUser.EditProject(project, 3);
-            TestUser.EditProject(project, 4);
+            TestUser.EditProject(project.Object, 1, cons.Object);
+            TestUser.EditProject(project.Object, 2, cons.Object);
+            TestUser.EditProject(project.Object, 3, cons.Object);
+            TestUser.EditProject(project.Object, 4, cons.Object);
 
-            project.Verify(mock => mock.SetName(It.IsAny(string), Times.Once());
-            project.Verify(mock => mock.SetDescription(It.IsAny(string), Times.Once());
-            project.Verify(mock => mock.SetStartDate(It.IsAny(string), Times.Once());
-            project.Verify(mock => mock.SetEndDate(It.IsAny(string), Times.Once());
-
-
-            */
+            project.Verify(mock => mock.SetName(It.IsAny<string>()), Times.Once());
+            project.Verify(mock => mock.SetDescription(It.IsAny<string>()), Times.Once());
+            project.Verify(mock => mock.SetStartDate(It.IsAny<DateTime>()), Times.Once());
+            project.Verify(mock => mock.SetEndDate(It.IsAny<DateTime>()), Times.Once());
         }
     }
 }
