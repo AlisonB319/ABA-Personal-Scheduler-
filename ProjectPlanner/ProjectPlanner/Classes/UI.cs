@@ -40,13 +40,23 @@ namespace ProjectPlanner.Classes
                     // Assuming that email is the username
                     User newUser = new User();
 
-                    string fName, lName, email, create_password;
+                    string fName, lName, email = "", create_password;
                     Console.WriteLine("Please enter your first name");
                     fName = Console.ReadLine();
                     Console.WriteLine("Please enter your last name");
                     lName = Console.ReadLine();
                     Console.WriteLine("Please enter your email, this is also your username");
-                    email = Console.ReadLine();
+                    bool valid = false;
+                    while (!valid)
+                    {
+                        email = Console.ReadLine();
+                        if (!email.Contains('@') || !email.Contains('.'))
+                        {
+                            Console.WriteLine("Invalid email. Provided email must contain '@' and a domain (i.e. ***.com)");
+                            Console.WriteLine("Please provide a valid email.");
+                        }
+                        else valid = true;
+                    }
                     Console.WriteLine("Please enter your password");
                     create_password = Console.ReadLine();
 
