@@ -7,7 +7,7 @@ namespace ProjectPlanner.Classes
     using System.Threading.Tasks;
 
 
-    public class User:IUser
+    public class User: IUser
     {
         private string _firstName, _lastName, _email, _password;
 
@@ -18,7 +18,7 @@ namespace ProjectPlanner.Classes
             _projects = new List<Project>();
         }
 
-        private string Getemail()
+        public virtual string Getemail()
         {
             return this._email;
         }
@@ -87,7 +87,7 @@ namespace ProjectPlanner.Classes
             this._password = password;
         }
 
-        public void CreateUser(string fname, string lname, string email, string password)
+        public virtual void CreateUser(string fname, string lname, string email, string password)
         {
             this._firstName = fname;
             this._lastName = lname;
@@ -95,7 +95,7 @@ namespace ProjectPlanner.Classes
             this._password = password;
         }
         
-        public bool AuthenticatePassword(string password)
+        public virtual bool AuthenticatePassword(string password)
         {
             if (this._password == password)
             {

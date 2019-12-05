@@ -8,7 +8,8 @@ namespace ProjectPlanner.Classes
     using System.Text;
     using System.Threading.Tasks;
 
-    public class DataStore
+
+    public class DataStore : IDataStore
     {
         private Hashtable _dataBase;
 
@@ -22,22 +23,22 @@ namespace ProjectPlanner.Classes
             return this._dataBase;
         }
 
-        public void SetDataBase(Hashtable value)
+        public virtual void SetDataBase(Hashtable value)
         {
             this._dataBase = value;
         }
 
-        public User getUserFromDatabase(string username)
+        public virtual User getUserFromDatabase(string username)
         {          
             return (User)this._dataBase[username];
         }
 
-        public void AddData(string username, User account)
+        public virtual void AddData(string username, User account)
         {
             this._dataBase.Add(username, account);
         }
 
-        public bool AuthenticateUsername(string username)
+        public virtual bool AuthenticateUsername(string username)
         {
             if (this._dataBase.ContainsKey(username))
             {
@@ -46,7 +47,7 @@ namespace ProjectPlanner.Classes
             return false;
         }
 
-        public bool AuthenticatePassword(string username, string password)
+        public virtual bool AuthenticatePassword(string username, string password)
         {
             //test was not passing due to a lack of null check from the getUserFromDatabase return value
             bool result = false;
