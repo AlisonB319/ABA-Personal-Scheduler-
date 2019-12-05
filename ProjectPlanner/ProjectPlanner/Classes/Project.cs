@@ -22,7 +22,7 @@
             return this.schedules;
         }
 
-        public void SetSchedules(List<Schedule> value)
+        public virtual void SetSchedules(List<Schedule> value)
         {
             this.schedules = value;
         }
@@ -61,7 +61,7 @@
             return this.endDate;
         }
 
-        public void SetEndDate(DateTime value)
+        public virtual void SetEndDate(DateTime value)
         {
             bool valid = false;
             while (valid == false)
@@ -88,7 +88,7 @@
             return this.startDate;
         }
 
-        public void SetStartDate(DateTime value)
+        public virtual void SetStartDate(DateTime value)
         {
             this.startDate = value;
         }
@@ -98,17 +98,17 @@
             return this.description;
         }
 
-        public void SetDescription(string value)
+        public virtual void SetDescription(string value)
         {
             this.description = value;
         }
 
-        public string GetName()
+        public virtual string GetName()
         {
             return this.name;
         }
 
-        public void SetName(string value)
+        public virtual void SetName(string value)
         {
             this.name = value;
         }

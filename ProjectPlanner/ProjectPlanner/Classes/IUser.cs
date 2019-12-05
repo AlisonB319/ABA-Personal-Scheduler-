@@ -42,7 +42,7 @@ namespace ProjectPlanner.Classes
         
 
 
-        void EditProject(Project project, int choice);
+        void EditProject(Project project, int choice, IConsole cons);
         
     }
 }
