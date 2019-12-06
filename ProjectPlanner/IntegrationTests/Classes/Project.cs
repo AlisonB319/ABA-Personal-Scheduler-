@@ -10,19 +10,19 @@
     {
         private string name, description;
         private DateTime startDate, endDate;
-        private List<Schedule> schedules;
+        private List<ISchedule> schedules;
 
         public Project()
         {
-            schedules = new List<Schedule>();
+            schedules = new List<ISchedule>();
         }
 
-        public List<Schedule> GetSchedules()
+        public List<ISchedule> GetSchedules()
         {
             return this.schedules;
         }
 
-        public void SetSchedules(List<Schedule> value)
+        public void SetSchedules(List<ISchedule> value)
         {
             this.schedules = value;
         }
@@ -34,7 +34,7 @@
             Console.WriteLine("\tStart Date: {0}", this.startDate.Date);
             Console.WriteLine("\tEnd Date: {0}", this.endDate.Date);
         }
-        public void AddSchedule(Schedule val)
+        public void AddSchedule(ISchedule val)
         {
             val.SetProject(this);
             this.schedules.Add(val);
@@ -45,13 +45,13 @@
         // name and removes it
         public bool RemoveSchedule(String val)
         {
-            Schedule toRemove = this.schedules.Find(x => x.GetName().Contains(val));
+            ISchedule toRemove = this.schedules.Find(x => x.GetName().Contains(val));
             return this.schedules.Remove(toRemove);
         }
 
         // this method accepts a schedule as parameter and removes that schedule from the list
         // returns true if successful and false if not.
-        public bool RemoveSchedule(Schedule val)
+        public bool RemoveSchedule(ISchedule val)
         {
             return this.schedules.Remove(val);
         }
@@ -165,7 +165,7 @@
                     Console.WriteLine("If you would like to add a schedule, press 'c'\nElse, press any other key");
                     string key = Console.ReadLine();
                     if (key == "c") {
-                        Schedule newSchedule = new Schedule();
+                        ISchedule newSchedule = new Schedule();
                         newSchedule.CreateSchedule(this);
                         this.AddSchedule(newSchedule);
                     }
@@ -196,7 +196,7 @@
                     if (op <= scheduleCount)
                     {
                         op--;
-                        Schedule schedule = this.schedules[op];
+                        ISchedule schedule = this.schedules[op];
 
                         if (choice == 2) this.RemoveSchedule(schedule);
                         else
@@ -278,6 +278,24 @@
                     }
                 }
             }
+        }
+
+        public bool ViewScheduleInt()
+        {
+            
+            if (this.GetSchedules().Count() == 0)
+            {
+               
+                
+                Schedule newSchedule = new Schedule();
+                newSchedule.CreateScheduleInt();
+                this.AddSchedule(newSchedule);
+                
+                return true;
+            }
+
+            return false;
+            
         }
     }
 }

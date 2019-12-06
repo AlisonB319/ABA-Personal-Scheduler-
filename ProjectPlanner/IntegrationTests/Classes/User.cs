@@ -95,7 +95,7 @@ namespace IntegrationTests.Classes
             this._password = password;
         }
         
-        public bool AuthenticatePassword(string password)
+        public virtual  bool AuthenticatePassword(string password)
         {
             if (this._password == password)
             {
