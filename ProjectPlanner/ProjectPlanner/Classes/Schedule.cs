@@ -7,7 +7,7 @@
     using System.Text;
     using System.Threading.Tasks;
 
-    public class Schedule
+    public class Schedule : ISchedule
     {
         private string name, client, description;
         private DateTime startDate, endDate;
@@ -26,7 +26,7 @@
             return this.proj;
         }
 
-        public string GetName()
+        public virtual string GetName()
         {
             return this.name;
         }
@@ -35,7 +35,7 @@
             this.name = value;
         }
 
-        public string GetClient()
+        public virtual string GetClient()
         {
             return this.client;
         }
