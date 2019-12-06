@@ -75,14 +75,12 @@ namespace ProjectPlanner.Classes
             Assert.AreEqual(schedule.GetPercentComplete(), worked / total);
 
             // Test to make sure total isn't 0 before function is called. Checks for divide by 0 error
+
             schedule.SetTotalHours(0.ToString());
-            try
-            {
-                schedule.UpdatePercentComplete();
-            } catch (DivideByZeroException)
-            {
-                Assert.Fail();
-            }
+            Console.WriteLine("{0} / {1}", schedule.GetHoursWorked(), schedule.GetTotalHours());
+            schedule.UpdatePercentComplete();
+
+            Assert.AreEqual(schedule.GetPercentComplete(), 0);
         }
     }
 }

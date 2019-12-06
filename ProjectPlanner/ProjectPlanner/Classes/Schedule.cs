@@ -122,7 +122,14 @@
 
         public void UpdatePercentComplete()
         {
-            this.percentComplete = this.GetHoursWorked() / this.GetTotalHours();
+            if (this.GetTotalHours() != 0)
+            {
+                this.percentComplete = this.GetHoursWorked() / this.GetTotalHours();
+            }
+            else
+            {
+                this.percentComplete = 0;
+            }
         }
 
         // Function to make sure that schedule times are within project times
