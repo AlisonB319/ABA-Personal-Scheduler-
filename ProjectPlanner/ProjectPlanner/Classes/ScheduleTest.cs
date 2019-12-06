@@ -51,5 +51,36 @@ namespace ProjectPlanner.Classes
             Assert.IsFalse(start);
             Assert.IsFalse(end);
         }
+
+        [Test]
+        public void UpdateTotalHoursTest()
+        {
+            int needed = 43, worked = 12;
+
+            schedule.SetHoursNeeded(needed.ToString());
+            schedule.SetHoursWorked(worked.ToString());
+            schedule.UpdateTotalHours();
+
+            Assert.AreEqual(schedule.GetTotalHours(), needed + worked);
+        }
+
+        [Test]
+        public void UpdatePercentCompleteTest()
+        {
+            float worked = (float)264.3, total = 665;
+            schedule.SetHoursWorked(worked.ToString());
+            schedule.SetTotalHours(total.ToString());
+
+            schedule.UpdatePercentComplete();
+            Assert.AreEqual(schedule.GetPercentComplete(), worked / total);
+
+            // Test to make sure total isn't 0 before function is called. Checks for divide by 0 error
+
+            schedule.SetTotalHours(0.ToString());
+            Console.WriteLine("{0} / {1}", schedule.GetHoursWorked(), schedule.GetTotalHours());
+            schedule.UpdatePercentComplete();
+
+            Assert.AreEqual(schedule.GetPercentComplete(), 0);
+        }
     }
 }
