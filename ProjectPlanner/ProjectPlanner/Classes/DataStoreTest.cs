@@ -26,6 +26,7 @@ namespace ProjectPlanner.Classes
             dataStore.AddData(user.Object.Getemail(), user.Object);
 
             Assert.IsTrue(dataStore.AuthenticateUsername("fname"));
+            Assert.IsFalse(dataStore.AuthenticateUsername("FNAME"));
             Assert.IsFalse(dataStore.AuthenticateUsername("fakeout"));
         }
 
@@ -41,6 +42,8 @@ namespace ProjectPlanner.Classes
             // make sure to authenticate the username correctly
             Assert.IsTrue(dataStore.AuthenticatePassword("username", "passwd"));
             Assert.IsFalse(dataStore.AuthenticatePassword("username", "fakepass"));
+            Assert.IsFalse(dataStore.AuthenticatePassword("notUser", "passwd"));
+            Assert.IsFalse(dataStore.AuthenticatePassword("notUser", "fakepass"));
         }
     }
 }

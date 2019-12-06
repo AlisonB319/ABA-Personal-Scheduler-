@@ -29,20 +29,13 @@ namespace ProjectPlanner.Classes
         }
         [Test]
         public void TestAddSchedule() {
-            // Would do mocking here, although none of the mocking frameworks in C# allow you to mock concrete classes, only interfaces
-            // Below is what I tried to do, but the Moq framework doesn't allow it
-            /* var mocked = new Mock<Schedule>();
-            mocked.Setup(schedule => schedule.GetName()).Returns("scheduleName");
-            p.AddSchedule(mocked.Object);
-            Assert.That(p.GetSchedules()[0].GetName(), Is.EqualTo("scheduleName"));
-            */
-            Schedule schedule = new Schedule();
-            schedule.SetName("schedulename");
-            p.AddSchedule(schedule);
+            // testing adding a schedule to a project
+            var sch = new Mock<Schedule>();
+            sch.Setup(s => s.GetName()).Returns("schedulename");
 
-            // checks to see if the schedule was actually added to the project
-            Assert.That(p.GetSchedules()[0].GetName(), Is.EqualTo("schedulename"));
-            Assert.That(p.GetSchedules()[0], Is.EqualTo(schedule));
+            p.AddSchedule(sch.Object);
+            Assert.AreEqual(p.GetSchedules()[0].GetName(), "schedulename");
+            Assert.AreEqual(p.GetSchedules()[0], sch.Object);
         }
         
         // This tests adding multiple schedules to a project, and makes sure that they
@@ -50,22 +43,21 @@ namespace ProjectPlanner.Classes
         [Test]
         public void TestAddMulipleSchedules()
         {
-            // Again, would do mocking here for multiple schedules, but we can't C# and concrete classes
-            Schedule s1 = new Schedule();
-            Schedule s2 = new Schedule();
-            Schedule s3 = new Schedule();
+            var s1 = new Mock<Schedule>();
+            var s2 = new Mock<Schedule>();
+            var s3 = new Mock<Schedule>();
 
-            s1.SetClient("Trevor Collins");
-            s2.SetClient("Alfredo Diaz");
-            s3.SetClient("Fiona Nova");
+            s1.Setup(s => s.GetClient()).Returns("Trevor Collins");
+            s2.Setup(s => s.GetClient()).Returns("Alfredo Diaz");
+            s3.Setup(s => s.GetClient()).Returns("Fiona Nova");
 
-            p.AddSchedule(s1);
-            p.AddSchedule(s2);
-            p.AddSchedule(s3);
+            p.AddSchedule(s1.Object);
+            p.AddSchedule(s2.Object);
+            p.AddSchedule(s3.Object);
 
-            Assert.AreEqual(p.GetSchedules()[0], s1);
-            Assert.AreEqual(p.GetSchedules()[1], s2);
-            Assert.AreEqual(p.GetSchedules()[2], s3);
+            Assert.AreEqual(p.GetSchedules()[0], s1.Object);
+            Assert.AreEqual(p.GetSchedules()[1], s2.Object);
+            Assert.AreEqual(p.GetSchedules()[2], s3.Object);
         }
 
         // This tests checks to see if we can remove a schedule successfully from a project
@@ -73,14 +65,13 @@ namespace ProjectPlanner.Classes
         public void TestRemoveSchedule()
         {
             // Testing that we can remove a schedule from a project
-            Schedule s = new Schedule();
+            var sch = new Mock<Schedule>();
+            sch.Setup(s => s.GetClient()).Returns("Fiona Nova");
 
-            s.SetClient("Fiona Nova");
-
-            p.AddSchedule(s);
+            p.AddSchedule(sch.Object);
             Assert.AreEqual(p.GetSchedules().Count, 1);
 
-            p.RemoveSchedule(s);
+            p.RemoveSchedule(sch.Object);
             Assert.AreEqual(p.GetSchedules().Count, 0);
         }
 
@@ -91,31 +82,31 @@ namespace ProjectPlanner.Classes
             // Test that, if we have three schedules and we move the one at index 1,
             // that the object at index 2 will move to index 1 after the removal
             // Makes sure the schedules keep their order
-            Schedule s1 = new Schedule();
-            Schedule s2 = new Schedule();
-            Schedule s3 = new Schedule();
+            var s1 = new Mock<Schedule>();
+            var s2 = new Mock<Schedule>();
+            var s3 = new Mock<Schedule>();
 
-            s1.SetClient("Gavin Free");
-            s2.SetClient("Alfredo Diaz");
-            s3.SetClient("Fiona Nova");
+            s1.Setup(s => s.GetClient()).Returns("Trevor Collins");
+            s2.Setup(s => s.GetClient()).Returns("Alfredo Diaz");
+            s3.Setup(s => s.GetClient()).Returns("Fiona Nova");
 
-            p.AddSchedule(s1);
-            p.AddSchedule(s2);
-            p.AddSchedule(s3);
+            p.AddSchedule(s1.Object);
+            p.AddSchedule(s2.Object);
+            p.AddSchedule(s3.Object);
 
             List<Schedule> before = new List<Schedule>();
             before.AddRange(new List<Schedule>
             {
-                s1, s2, s3,
+                s1.Object, s2.Object, s3.Object,
             });
             Assert.AreEqual(p.GetSchedules(), before);
 
-            p.RemoveSchedule(s2);
+            p.RemoveSchedule(s2.Object);
 
             List<Schedule> after = new List<Schedule>();
             after.AddRange(new List<Schedule>
             {
-                s1, s3,
+                s1.Object, s3.Object,
             });
 
             Assert.AreEqual(p.GetSchedules(), after);
@@ -128,10 +119,10 @@ namespace ProjectPlanner.Classes
         public void TestRemoveScheduleByName()
         {
             // would use mocking here as well
-            Schedule s = new Schedule();
-            s.SetName("newname");
+            var s1 = new Mock<Schedule>();
+            s1.Setup(s => s.GetName()).Returns("newname");
 
-            p.AddSchedule(s);
+            p.AddSchedule(s1.Object);
 
             Assert.AreEqual(p.GetSchedules().Count, 1);
 
@@ -143,26 +134,25 @@ namespace ProjectPlanner.Classes
         [Test]
         public void TestRemoveNonexistantSchedule()
         {
-            // would use mocking here
-            Schedule s1 = new Schedule();
-            Schedule s2 = new Schedule();
-            Schedule s3 = new Schedule();
+            var s1 = new Mock<Schedule>();
+            var s2 = new Mock<Schedule>();
+            var s3 = new Mock<Schedule>();
 
-            s1.SetName("first schedule");
-            s2.SetName("second schedule");
-            s3.SetName("third schedule");
+            s1.Setup(s => s.GetName()).Returns("first schedule");
+            s2.Setup(s => s.GetName()).Returns("second schedule");
+            s3.Setup(s => s.GetName()).Returns("third schedule");
 
-            p.AddSchedule(s1);
+            p.AddSchedule(s1.Object);
 
 
             // testing removing schedule that isn't in project doesn't crash, and that it returns false
             // this tests using a schedule as an argument
-            Assert.DoesNotThrow(() => p.RemoveSchedule(s2));
-            Assert.IsFalse(p.RemoveSchedule(s2));
+            Assert.DoesNotThrow(() => p.RemoveSchedule(s2.Object));
+            Assert.IsFalse(p.RemoveSchedule(s2.Object));
 
             // these assertions do the same thing as above except tests the overloaded function using a schedule name as an argument
-            Assert.DoesNotThrow(() => p.RemoveSchedule(s3.GetName()));
-            Assert.IsFalse(p.RemoveSchedule(s3.GetName()));
+            Assert.DoesNotThrow(() => p.RemoveSchedule(s3.Object.GetName()));
+            Assert.IsFalse(p.RemoveSchedule(s3.Object.GetName()));
         }
 
         //[Test]
