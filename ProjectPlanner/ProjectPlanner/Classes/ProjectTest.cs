@@ -123,7 +123,9 @@ namespace ProjectPlanner.Classes
             s1.Setup(s => s.GetName()).Returns("newname");
 
             p.AddSchedule(s1.Object);
+            Assert.AreEqual(p.GetSchedules().Count, 1);
 
+            p.RemoveSchedule("fakename");
             Assert.AreEqual(p.GetSchedules().Count, 1);
 
             p.RemoveSchedule("newname");
