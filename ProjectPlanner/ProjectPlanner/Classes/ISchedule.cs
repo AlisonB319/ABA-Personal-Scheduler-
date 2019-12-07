@@ -44,7 +44,7 @@ namespace ProjectPlanner.Classes
 
         float GetTotalHours();
 
-        void SetTotalHours(float val);
+        void SetTotalHours(string val);
 
         void UpdateTotalHours();
 
