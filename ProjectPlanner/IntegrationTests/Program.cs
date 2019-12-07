@@ -12,7 +12,7 @@ namespace IntegrationTests
             ProjectIntegration prIntegration = new ProjectIntegration();
 
             uIIntegration.RunTests();
-            //dsIntegration.RunTests();
+            dsIntegration.RunTests();
             prIntegration.RunTests();
         }
     }

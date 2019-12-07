@@ -118,15 +118,16 @@
         {
             return this.totalHours;
         }
-        public void SetTotalHours(float val)
+        public void SetTotalHours(string value)
         {
-            this.totalHours = val;
+            float hours = float.Parse(value, CultureInfo.InvariantCulture.NumberFormat);
+            this.totalHours = hours;
         }
 
         public void UpdateTotalHours()
         {
             float num = this.GetHoursNeeded() + this.GetHoursWorked();
-            this.SetTotalHours(num);
+            this.SetTotalHours(num.ToString());
         }
 
         public void UpdatePercentComplete()
@@ -239,7 +240,7 @@
             this.SetHoursWorked(hoursWorked);
 
             float num = this.GetHoursNeeded() + this.GetHoursNeeded();
-            this.SetTotalHours(num);
+            this.SetTotalHours(num.ToString());
 
             this.UpdatePercentComplete();
 
@@ -272,7 +273,7 @@
             this.SetHoursWorked("0");
 
             float num = this.GetHoursNeeded() + this.GetHoursNeeded();
-            this.SetTotalHours(num);
+            this.SetTotalHours(num.ToString());
 
             this.UpdatePercentComplete();
 
