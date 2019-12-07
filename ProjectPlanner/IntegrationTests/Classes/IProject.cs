@@ -6,21 +6,21 @@ using System.Threading.Tasks;
 
 namespace IntegrationTests.Classes
 {
-    interface IProject
+    public interface IProject
     {
 
-        List<Schedule> GetSchedules();
+        List<ISchedule> GetSchedules();
 
-        void SetSchedules(List<Schedule> value);
+        void SetSchedules(List<ISchedule> value);
 
 
         void DisplayAttributes();
 
-        void AddSchedule(Schedule val);
+        void AddSchedule(ISchedule val);
 
         bool RemoveSchedule(String val);
 
-        bool RemoveSchedule(Schedule val);
+        bool RemoveSchedule(ISchedule val);
 
 
         DateTime GetEndDate();
