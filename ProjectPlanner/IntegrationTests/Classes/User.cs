@@ -241,5 +241,41 @@ namespace IntegrationTests.Classes
                     return;
             };
         }
+
+        public void EditProject(Project project, int choice, IConsole Console)
+        {
+            string input;
+            switch (choice)
+            {
+                case 1:
+                    Console.WriteLine("Editing Project Name");
+                    Console.Write("New name: ");
+                    input = Console.ReadLine();
+                    project.SetName(input);
+                    break;
+                case 2:
+                    Console.WriteLine("Editing Project Description");
+                    Console.Write("New Description: ");
+                    input = Console.ReadLine();
+                    project.SetDescription(input);
+                    break;
+                case 3:
+                    Console.WriteLine("Editing Start Date");
+                    Console.Write("New Start Date: ");
+                    input = Console.ReadLine();
+                    DateTime.TryParse(input, out DateTime newDate);
+                    project.SetStartDate(newDate);
+                    break;
+                case 4:
+                    Console.WriteLine("Editing End Date");
+                    Console.Write("New End Date:");
+                    input = Console.ReadLine();
+                    DateTime.TryParse(input, out newDate);
+                    project.SetEndDate(newDate);
+                    break;
+                default:
+                    return;
+            };
+        }
     }
 }

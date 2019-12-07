@@ -8,8 +8,10 @@ namespace IntegrationTests
         static void Main(string[] args)
         {
             UIIntegration uIIntegration = new UIIntegration();
+            UserIntegration userIntegration = new UserIntegration();
 
             uIIntegration.RunTests();
+            userIntegration.RunTests();
         }
     }
 }
