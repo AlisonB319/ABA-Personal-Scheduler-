@@ -11,7 +11,7 @@ namespace IntegrationTests.Classes
         {
             TestGetProject();
             TestRemoveProject();
-            TestEditProject();
+            //TestEditProject();
         }
 
         public void TestGetProject()
