@@ -57,7 +57,7 @@
                 return user.AuthenticatePassword(password);
         }
 
-        public User GetAuthenticatedUser(string username, string password)
+        public virtual User GetAuthenticatedUser(string username, string password)
         {
             return (User)this._dataBase[username];
         }

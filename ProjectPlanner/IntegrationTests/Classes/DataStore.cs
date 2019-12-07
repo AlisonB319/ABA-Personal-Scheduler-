@@ -27,7 +27,7 @@ namespace IntegrationTests.Classes
             this._dataBase = value;
         }
 
-        public User getUserFromDatabase(string username)
+        public virtual User getUserFromDatabase(string username)
         {          
             return (User)this._dataBase[username];
         }

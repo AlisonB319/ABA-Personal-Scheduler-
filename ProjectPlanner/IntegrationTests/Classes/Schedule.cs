@@ -7,7 +7,7 @@
     using System.Text;
     using System.Threading.Tasks;
 
-    public class Schedule
+    public class Schedule:ISchedule
     {
         private string name, client, description;
         private DateTime startDate, endDate;
@@ -65,6 +65,11 @@
             DateTime.TryParse(value, out DateTime startDate);
             this.startDate = startDate;
         }
+
+        public void SetStartDate(DateTime value)
+        {
+            this.startDate = value;
+        }
         
         public DateTime GetEndDate()
         {
@@ -76,7 +81,12 @@
             DateTime.TryParse(value, out DateTime endDate);
             this.startDate = endDate;
         }
-        
+
+        public void SetEndDate(DateTime value)
+        {
+            this.endDate = value;
+        }
+
         public float GetHoursNeeded()
         {
             return this.hoursNeeded;
@@ -236,6 +246,38 @@
             Console.WriteLine("Please enter the description of the schedule");
             description = Console.ReadLine();
             this.SetDescription(description);
+        }
+
+        public void CreateScheduleInt()
+        {
+            string name, client;
+
+            name = "name";
+            this.SetName(name);
+
+            client = "client";
+            this.SetClient(client);
+
+            DateTime ProjStart = new DateTime(1, 1, 1);
+            this.SetStartDate(ProjStart);
+
+            DateTime ProjEnd = new DateTime(1, 1, 2);
+            this.SetEndDate(ProjEnd);
+
+
+            
+            this.SetHoursNeeded("1");
+
+
+            this.SetHoursWorked("0");
+
+            float num = this.GetHoursNeeded() + this.GetHoursNeeded();
+            this.SetTotalHours(num);
+
+            this.UpdatePercentComplete();
+
+            
+            this.SetDescription("test");
         }
     }
 }

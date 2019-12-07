@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IntegrationTests.Classes
 {
-    interface ISchedule
+    public interface ISchedule
     {
         void SetProject(Project val);
 
